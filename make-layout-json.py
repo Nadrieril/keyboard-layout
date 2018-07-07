@@ -2,7 +2,7 @@
 
 import re
 
-xkb_line_regex = re.compile("key\s*(?P<key><\w+>)\s*{\s*\[\s*(\w+),\s*(\w+),\s*(\w+),\s*(\w+)\s*\]\s*};$")
+xkb_line_regex = re.compile("^\s*key\s*(?P<key><\w+>)\s*{\s*\[\s*(\w+),\s*(\w+),\s*(\w+),\s*(\w+)\s*\]\s*};$")
 symbol_dict = {
     "ae": "æ",
     "ampersand": "&",
