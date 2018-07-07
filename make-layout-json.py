@@ -1,31 +1,38 @@
 #!/usr/bin/env python
 
-import re
+import sys, re
 
 xkb_line_regex = re.compile("^\s*key\s*(?P<key><\w+>)\s*{\s*\[\s*(\w+),\s*(\w+),\s*(\w+),\s*(\w+)\s*\]\s*};$")
 symbol_dict = {
+    "Eurosign": "€",
     "ae": "æ",
+    "agrave": "à",
     "ampersand": "&",
     "apostrophe": "'",
     "asciicircum": "^",
     "asciitilde": "~",
     "asterisk": "*",
     "at": "@",
-    "bar": "|",
     "backslash": "\\\\",
+    "bar": "|",
     "braceleft": "{",
     "braceright": "}",
     "bracketleft": "[",
     "bracketleft": "[",
     "bracketright": "]",
     "bracketright": "]",
+    "ccedilla": "ç",
     "colon": ":",
     "comma": ",",
     "dead_circumflex": "^",
+    "dead_diaeresis": "¨",
     "dead_grave": "`",
     "dead_tilde": "~",
+    "degree": "°",
     "dollar": "$",
     "downarrow": "↓",
+    "eacute": "é",
+    "egrave": "è",
     "equal": "=",
     "exclam": "!",
     "grave": "`",
@@ -36,7 +43,7 @@ symbol_dict = {
     "mu": "µ",
     "notsign": "¬",
     "numbersign": "#",
-    "paragraph": "§",
+    "paragraph": "¶",
     "parenleft": "(",
     "parenleft": "(",
     "parenright": ")",
@@ -47,21 +54,30 @@ symbol_dict = {
     "plus": "+",
     "question": "?",
     "quotedbl": "\\\"",
+    "quotedbl": "\\\"",
     "rightarrow": "→",
+    "section": "§",
     "semicolon": ";",
     "slash": "/",
+    "sterling": "£",
     "twosuperior": "²",
+    "ugrave": "ù",
     "underscore": "_",
     "uparrow": "↑",
 }
 def pretty(x):
-    x = symbol_dict.get(x, x)
-    return x if len(x) == 1 else ""
+    if x in symbol_dict:
+        return symbol_dict[x]
+    elif len(x) == 1:
+        return x
+    else:
+        # print(x, file=sys.stderr)
+        return "•" # "ⁿ̸ₐ"
 
 with open("keyboard-layout.json") as f:
     json = f.read()
 
-with open("latin.xkb") as f:
+with open("custom.xkb") as f:
     for row in f:
         if row == "": continue
         r = re.match(xkb_line_regex, row)
