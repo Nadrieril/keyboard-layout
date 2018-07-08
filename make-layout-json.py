@@ -29,7 +29,7 @@ def pretty(x):
 with open("symbols.json") as f:
     symbol_dict = json.loads(f.read())
 
-with open("keyboard-layout.json") as f:
+with open("layout-template.json") as f:
     layout = f.read()
 
 with open("fingers.json") as f:
