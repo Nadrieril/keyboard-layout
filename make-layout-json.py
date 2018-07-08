@@ -4,68 +4,6 @@
 import sys, re, json
 
 xkb_line_regex = re.compile("^\s*key\s*(?P<key><\w+>)\s*{\s*\[\s*(\w+),\s*(\w+),\s*(\w+),\s*(\w+)\s*\]\s*};$")
-symbol_dict = {
-    "Eurosign": "€",
-    "ae": "æ",
-    "agrave": "à",
-    "ampersand": "&",
-    "apostrophe": "'",
-    "asciicircum": "^",
-    "asciitilde": "~",
-    "asterisk": "*",
-    "at": "@",
-    "backslash": "\\\\",
-    "bar": "|",
-    "braceleft": "{",
-    "braceright": "}",
-    "bracketleft": "[",
-    "bracketleft": "[",
-    "bracketright": "]",
-    "bracketright": "]",
-    "ccedilla": "ç",
-    "colon": ":",
-    "comma": ",",
-    "dead_circumflex": "^",
-    "dead_diaeresis": "¨",
-    "dead_grave": "`",
-    "dead_tilde": "~",
-    "degree": "°",
-    "dollar": "$",
-    "downarrow": "↓",
-    "eacute": "é",
-    "egrave": "è",
-    "equal": "=",
-    "exclam": "!",
-    "grave": "`",
-    "greater": ">",
-    "leftarrow": "←",
-    "less": "<",
-    "minus": "-",
-    "mu": "µ",
-    "notsign": "¬",
-    "numbersign": "#",
-    "paragraph": "¶",
-    "parenleft": "(",
-    "parenleft": "(",
-    "parenright": ")",
-    "parenright": ")",
-    "percent": "%",
-    "period": ".",
-    "periodcentered": "·",
-    "plus": "+",
-    "question": "?",
-    "quotedbl": "\\\"",
-    "quotedbl": "\\\"",
-    "rightarrow": "→",
-    "section": "§",
-    "semicolon": ";",
-    "slash": "/",
-    "sterling": "£",
-    "twosuperior": "²",
-    "ugrave": "ù",
-    "underscore": "_",
-    "uparrow": "↑",
-}
 finger_colors = {
      0: "#474747",
      1: "#7d1b22",
@@ -87,6 +25,9 @@ def pretty(x):
     else:
         # print(x, file=sys.stderr)
         return "" #"•" # "ⁿ̸ₐ"
+
+with open("symbols.json") as f:
+    symbol_dict = json.loads(f.read())
 
 with open("keyboard-layout.json") as f:
     layout = f.read()
