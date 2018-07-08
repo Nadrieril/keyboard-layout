@@ -32,7 +32,7 @@ with open("symbols.json") as f:
 with open("layout-template.json") as f:
     layout = f.read()
 
-with open("fingers.json") as f:
+with open("fingers-wide.json") as f:
     fingers = json.loads(f.read())
     for key, f in fingers.items():
         layout = layout.replace("\"%s\"" % (key,), "{\"c\":\"%s\"},\"%s\"" %
