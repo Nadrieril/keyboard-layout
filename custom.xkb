@@ -82,4 +82,5 @@
     key <AB09>	{ [    period,    greater, periodcentered,   division ]	};
     key <AB10>	{ [     slash,   question, dead_belowdot, dead_abovedot ] };
 
-
+# pc
+    key <LSGT> {    [ less, greater, bar, brokenbar ] };
