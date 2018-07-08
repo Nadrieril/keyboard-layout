@@ -2,6 +2,10 @@ This repo contains a definition of my colemak-based custom keyboard layout, and
 scripts to transform a xkb definition into data suitable to be used with
 http://www.keyboard-layout-editor.com
 
+The layout is a [colemak](https://colemak.com/) layout extended with various
+[mods](https://colemakmods.github.io/ergonomic-mods/index.html) and personal
+tweaks.
+
 The `make-layout-json.py` script reads the layout definition in `custom.xkb`,
 the finger map in `fingers.json` or `fingers-wide.json`, the map to display xkb
 symbol names in `symbols.json`, and the layout template in
