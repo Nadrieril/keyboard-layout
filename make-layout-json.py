@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Use with http://www.keyboard-layout-editor.com
 
-import sys, re
+import sys, re, json
 
 xkb_line_regex = re.compile("^\s*key\s*(?P<key><\w+>)\s*{\s*\[\s*(\w+),\s*(\w+),\s*(\w+),\s*(\w+)\s*\]\s*};$")
 symbol_dict = {
@@ -66,6 +66,19 @@ symbol_dict = {
     "underscore": "_",
     "uparrow": "↑",
 }
+finger_colors = {
+     0: "#474747",
+     1: "#7d1b22",
+     2: "#2d7370",
+    -2: "#365c70",
+     3: "#1e5422",
+    -3: "#1e5422",
+     4: "#6e0964",
+    -4: "#6e0964",
+     5: "#705800",
+    -5: "#705800",
+}
+
 def pretty(x):
     if x in symbol_dict:
         return symbol_dict[x]
@@ -76,7 +89,13 @@ def pretty(x):
         return "" #"•" # "ⁿ̸ₐ"
 
 with open("keyboard-layout.json") as f:
-    json = f.read()
+    layout = f.read()
+
+with open("fingers.json") as f:
+    fingers = json.loads(f.read())
+    for key, f in fingers.items():
+        layout = layout.replace("\"%s\"" % (key,), "{\"c\":\"%s\"},\"%s\"" %
+                (finger_colors[f], key))
 
 with open("custom.xkb") as f:
     for row in f:
@@ -89,7 +108,7 @@ with open("custom.xkb") as f:
             symbs[0] = symbs[1]
             symbs[1] = ""
         symb_str = "%s\\n\\n\\n%s\\n\\n\\n\\n\\n\\n%s" % (symbs[1], symbs[2], symbs[0])
-        json = json.replace(key, symb_str)
+        layout = layout.replace(key, symb_str)
 
-print(json)
+print(layout)
 
