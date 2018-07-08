@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# Use with http://www.keyboard-layout-editor.com
 
 import sys, re
 
@@ -72,7 +73,7 @@ def pretty(x):
         return x
     else:
         # print(x, file=sys.stderr)
-        return "•" # "ⁿ̸ₐ"
+        return "" #"•" # "ⁿ̸ₐ"
 
 with open("keyboard-layout.json") as f:
     json = f.read()
