@@ -21,6 +21,7 @@ xkb_keymap {{
 finger_colors = {
      0: "#474747",
      1: "#7d1b22",
+    -1: "#7d1b22",
      2: "#2d7370",
     -2: "#365c70",
      3: "#1e5422",
@@ -43,8 +44,14 @@ def pretty(x):
         return "" #"•" # "ⁿ̸ₐ"
 
 
-with open("data/key-names.json") as f:
-    layout_order = json.loads(f.read())
+with open("data/layout-template.json") as f:
+    layout_template = f.read()
+
+layout_order = [
+    x
+    for row in json.loads(layout_template) if isinstance(row, list)
+    for x in row if isinstance(x, str) and x[0] == "<"
+]
 
 with open(KEYMAP) as f:
     keymap = yaml.safe_load(f.read())
@@ -63,9 +70,6 @@ with open("custom.xkb", "w") as f:
     f.write(XKB_TEMPLATE.format(**keymap))
 
 
-with open("data/layout-template.json") as f:
-    layout_template = f.read()
-
 fingers_map_name = keymap.get("fingers_map", "default")
 with open("data/finger-maps/{}.json".format(fingers_map_name)) as f:
     fingers = json.loads(f.read())
@@ -74,10 +78,12 @@ with open("data/finger-maps/{}.json".format(fingers_map_name)) as f:
                 "{\"c\":\"%s\"},\"%s\"" % (finger_colors[f], key))
 
 for (key, symbs) in keys_to_symbols.items():
-    symbs = [ pretty(x.strip()) for x in symbs.split(",") ]
+    symbs = [ pretty(x.strip()) for x in symbs.split(",") ] + [""]*3
     if symbs[1] == symbs[0].upper():
         symbs[0] = symbs[1]
         symbs[1] = ""
+    if symbs[0] == symbs[2]:
+        symbs[2] = ""
     symb_str = "%s\\n\\n\\n%s\\n\\n\\n\\n\\n\\n%s" % (symbs[1], symbs[2], symbs[0])
     layout_template = layout_template.replace(key, symb_str)
 

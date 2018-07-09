@@ -30,7 +30,9 @@ symbols:
     - 9, parenleft, leftsinglequotemark, leftdoublequotemark
     - 0, parenright, rightsinglequotemark, rightdoublequotemark
     - minus, underscore, endash, emdash
+    - BackSpace
 
+    - Tab,  ISO_Left_Tab
     - q, Q, adiaeresis, Adiaeresis
     - w, W, aring, Aring
     - f, F, atilde, Atilde
@@ -43,7 +45,9 @@ symbols:
     - y, Y, udiaeresis, Udiaeresis
     - semicolon, colon, odiaeresis, Odiaeresis
     - backslash, bar, asciitilde, asciitilde
+    - Return
 
+    - Control_L
     - a, A, agrave, Agrave
     - r, R, dead_grave, asciitilde
     - s, S, ssharp, asciitilde
@@ -57,6 +61,7 @@ symbols:
     - o, O, ocircumflex, Ocircumflex
     - apostrophe, quotedbl, otilde, Otilde
 
+    - Shift_L, ISO_Prev_Group, Shift_L, ISO_Prev_Group
     - z, Z, ae, AE
     - x, X, dead_circumflex, asciitilde
     - c, C, ccedilla, Ccedilla
@@ -68,5 +73,12 @@ symbols:
     - h, H, dead_caron, asciitilde
     - comma, less, dead_cedilla, asciitilde
     - period, greater, dead_abovedot, asciitilde
+    - Shift_R, ISO_Next_Group, Shift_R, ISO_Next_Group
 
+    - Control_L
+    - Meta_L
+    - Alt_L
     - space, space, space, nobreakspace
+    - ISO_Level3_Shift
+    - Control_R
+
