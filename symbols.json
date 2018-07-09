@@ -1,5 +1,8 @@
 {
+  "Agrave": "À",
   "Eurosign": "€",
+  "Ocircumflex": "Ô",
+  "Ugrave": "Ù",
   "ae": "æ",
   "agrave": "à",
   "ampersand": "&",
@@ -38,6 +41,7 @@
   "mu": "µ",
   "notsign": "¬",
   "numbersign": "#",
+  "ocircumflex": "ô",
   "paragraph": "¶",
   "parenleft": "(",
   "parenleft": "(",
