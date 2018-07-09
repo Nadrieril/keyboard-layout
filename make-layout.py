@@ -3,6 +3,8 @@
 
 import sys, re, json, yaml
 
+KEYMAP = sys.argv[1]
+
 XKB_TEMPLATE = """
 xkb_keymap {{
     xkb_keycodes  {{ {keycodes} }};
@@ -29,6 +31,8 @@ finger_colors = {
     -5: "#705800",
 }
 
+with open("data/symbol-names.yaml") as f:
+    symbol_dict = yaml.safe_load(f.read())
 def pretty(x):
     if x in symbol_dict:
         return symbol_dict[x]
@@ -38,25 +42,23 @@ def pretty(x):
         # print(x, file=sys.stderr)
         return "" #"•" # "ⁿ̸ₐ"
 
-with open("data/symbol-names.yaml") as f:
-    symbol_dict = yaml.safe_load(f.read())
-
 
 with open("data/key-names.json") as f:
     layout_order = json.loads(f.read())
 
-with open("keymap.yaml") as f:
+with open(KEYMAP) as f:
     keymap = yaml.safe_load(f.read())
 
-key_map = {}
-for (k, v) in zip(layout_order, keymap["symbols"]["keys"]):
-    key_map[k] = v
+keys_to_symbols = {
+    k: v
+    for (k, v) in zip(layout_order, keymap["symbols"]["keys"])
+}
 
 
 with open("custom.xkb", "w") as f:
     keymap["symbols"]["keys"] = "\n".join(
         "key %s { [], [ %s ] };" % (k, v)
-        for (k, v) in key_map.items()
+        for (k, v) in keys_to_symbols.items()
     )
     f.write(XKB_TEMPLATE.format(**keymap))
 
@@ -68,10 +70,10 @@ fingers_map_name = keymap.get("fingers_map", "default")
 with open("data/finger-maps/{}.json".format(fingers_map_name)) as f:
     fingers = json.loads(f.read())
     for key, f in fingers.items():
-        layout_template = layout_template.replace("\"%s\"" % (key,), "{\"c\":\"%s\"},\"%s\"" %
-                (finger_colors[f], key))
+        layout_template = layout_template.replace("\"%s\"" % (key,),
+                "{\"c\":\"%s\"},\"%s\"" % (finger_colors[f], key))
 
-for (key, symbs) in key_map.items():
+for (key, symbs) in keys_to_symbols.items():
     symbs = [ pretty(x.strip()) for x in symbs.split(",") ]
     if symbs[1] == symbs[0].upper():
         symbs[0] = symbs[1]
