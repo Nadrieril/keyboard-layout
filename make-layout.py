@@ -1,23 +1,20 @@
 #!/usr/bin/env python
 # Use with http://www.keyboard-layout-editor.com
 
-import sys, re, json
+import sys, re, json, yaml
 
-FINGER_MAP_FILE = "fingers-wide.json"
-LAYOUT_NAME = "Colemak (wide mod, DH mod, angle mod, custom modifications)"
 XKB_TEMPLATE = """
-xkb_keymap {
-    xkb_keycodes  { include "evdev+aliases(azerty)" };
-    xkb_types     { include "complete" };
-    xkb_compat    { include "complete" };
-    xkb_symbols   {
-        include "pc+fr+inet(evdev)+group(shifts_toggle)+ctrl(nocaps)+compose(paus)"
-        name[Group2]= "%s";
-%s
-        include "level3(ralt_switch)"
-    };
-    xkb_geometry  { include "pc(pc105)" };
-};
+xkb_keymap {{
+    xkb_keycodes  {{ {keycodes} }};
+    xkb_types     {{ {types} }};
+    xkb_compat    {{ {compat} }};
+    xkb_symbols   {{
+{symbols[before]}
+{symbols[keys]}
+{symbols[after]}
+    }};
+    xkb_geometry  {{ {geometry} }};
+}};
 """
 finger_colors = {
      0: "#474747",
@@ -41,34 +38,34 @@ def pretty(x):
         # print(x, file=sys.stderr)
         return "" #"•" # "ⁿ̸ₐ"
 
-with open("symbols.json") as f:
-    symbol_dict = json.loads(f.read())
+with open("data/symbol-names.yaml") as f:
+    symbol_dict = yaml.safe_load(f.read())
 
 
-with open("layout-order.json") as f:
+with open("data/key-names.json") as f:
     layout_order = json.loads(f.read())
 
-with open("layout-map.json") as f:
-    layout_map = json.loads(f.read())
+with open("keymap.yaml") as f:
+    keymap = yaml.safe_load(f.read())
 
 key_map = {}
-for (x, y) in zip(layout_order, layout_map):
-    for (k, v) in zip(x, y):
-        key_map[k] = v
+for (k, v) in zip(layout_order, keymap["symbols"]["keys"]):
+    key_map[k] = v
 
 
 with open("custom.xkb", "w") as f:
-    key_defs = "\n".join(
-        "        key %s { [], [ %s ] };" % (k, v)
+    keymap["symbols"]["keys"] = "\n".join(
+        "key %s { [], [ %s ] };" % (k, v)
         for (k, v) in key_map.items()
     )
-    f.write(XKB_TEMPLATE % (LAYOUT_NAME, key_defs))
+    f.write(XKB_TEMPLATE.format(**keymap))
 
 
-with open("layout-template.json") as f:
+with open("data/layout-template.json") as f:
     layout_template = f.read()
 
-with open(FINGER_MAP_FILE) as f:
+fingers_map_name = keymap.get("fingers_map", "default")
+with open("data/finger-maps/{}.json".format(fingers_map_name)) as f:
     fingers = json.loads(f.read())
     for key, f in fingers.items():
         layout_template = layout_template.replace("\"%s\"" % (key,), "{\"c\":\"%s\"},\"%s\"" %
