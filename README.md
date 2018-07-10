@@ -1,8 +1,8 @@
-This repo contains a definition of my colemak-based custom keyboard layout, and
+This repo contains a definition of my custom keyboard layout, and
 scripts to transform a xkb definition into data suitable to be used with
 http://www.keyboard-layout-editor.com
 
-The layout is a [colemak](https://colemak.com/) layout extended with various
+The layout is a French layout extended with various
 [mods](https://colemakmods.github.io/ergonomic-mods/index.html) and personal
 tweaks.
 

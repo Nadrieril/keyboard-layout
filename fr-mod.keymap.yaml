@@ -1,0 +1,116 @@
+keycodes: |-
+  include "evdev+aliases(azerty)"
+types: |-
+  include "complete"
+compat: |-
+  include "complete"
+geometry: |-
+  include "pc(pc105)"
+
+fingers_map: wide
+
+symbols:
+  before: |
+    include "pc+fr+inet(evdev)+group(shifts_toggle)+ctrl(nocaps)+level3(ralt_switch)"
+    name[Group2]= "French (wide mod, angle mod, custom modifications)";
+
+  after: |
+    key <TLDE> { [ Multi_key ], [ Multi_key ] };
+
+  keys:
+# .
+# ,
+#
+# ?
+# !
+# :
+# -
+# "
+# '
+#
+# `
+# @
+# ^
+# $
+# /
+# ;
+# <
+# >
+# #
+# _
+# |
+#
+# *
+# &
+# ~
+# =
+# +
+# %
+# £
+# °
+
+
+    - Multi_key
+    - 1, asciitilde, asciitilde, asciitilde
+    - 2, at, asciitilde, asciitilde
+    - 3, numbersign, asciitilde, asciitilde
+    - 4, dollar, sterling, asciitilde
+    - 5, percent, EuroSign, yen
+    - minus, underscore, asciitilde, asciitilde
+    - 6, asciitilde, asciitilde, asciitilde
+    - 7, ampersand, asciitilde, asciitilde
+    - 8, asciicircum, asciitilde, asciitilde
+    - 9, asciitilde, asciitilde, asciitilde
+    - 0, asciitilde, asciitilde, asciitilde
+    - equal, plus, degree, asciitilde
+    - BackSpace
+
+    - Tab,  ISO_Left_Tab
+    - a, A, agrave, Agrave
+    - z, Z, ecircumflex, Ecircumflex
+    - e, E, eacute, Eacute
+    - r, R, egrave, Egrave
+    - t, T, asciitilde, asciitilde
+    - less, greater, asciitilde, asciitilde
+    - y, Y, asciitilde, asciitilde
+    - u, U, ugrave, Ugrave
+    - i, I, asciitilde, asciitilde
+    - o, O, ocircumflex, Ocircumflex
+    - p, P, asciitilde, asciitilde
+    - backslash, bar, asterisk, asciitilde
+    - Return
+
+    - Control_L
+    - q, Q, asciitilde, asciitilde
+    - s, S, asciitilde, asciitilde
+    - d, D, asciitilde, asciitilde
+    - f, F, asciitilde, asciitilde
+    - g, G, asciitilde, asciitilde
+    - minus, underscore, asciitilde, asciitilde
+    - h, H, asciitilde, asciitilde
+    - j, J, asciitilde, asciitilde
+    - k, K, asciitilde, asciitilde
+    - l, L, asciitilde, asciitilde
+    - m, M, asciitilde, asciitilde
+    - apostrophe, quotedbl, grave, asciitilde
+
+    - Shift_L, ISO_Prev_Group, Shift_L, ISO_Prev_Group
+    - w, W, asciitilde, asciitilde
+    - x, X, asciitilde, asciitilde
+    - c, C, ccedilla, Ccedilla
+    - v, V, asciitilde, asciitilde
+    - b, B, asciitilde, asciitilde
+    - parenleft, bracketleft, braceleft, guillemotleft
+    - parenright, bracketright, braceright, guillemotright
+    - n, N, ntilde, Ntilde
+    - comma, question, exclam, asciitilde
+    - period, colon, asciitilde, asciitilde
+    - slash, semicolon, asciitilde, asciitilde
+    - Shift_R, ISO_Next_Group, Shift_R, ISO_Next_Group
+
+    - Control_L
+    - Super_L
+    - Alt_L
+    - space, space, space, nobreakspace
+    - ISO_Level3_Shift
+    - Control_R
