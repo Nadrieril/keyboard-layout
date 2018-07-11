@@ -1,0 +1,15 @@
+2018-07-10 offlineimap download oxford emails
+2018-07-10 offlineimap download gmail emails
+2018-07-10 gather text of sent emails
+2018-07-11 download facebook data
+2018-07-11 get chats from downloaded facebook data
+2018-07-10 try to recover quassel logs
+2018-07-11 get IRC logs from someone else
+2018-07-11 cleanup corpus
+2018-07-11 check letter frequencies for anomalies
+2018-07-11 check corpus is large enough
+2018-07-11 get most used symbols from corpus
+2018-07-11 split multi-key symbols in corpus (like "ê" into "^e")
+2018-07-10 construct keyboard layout using corpus (weechat+quassel+email) and https://github.com/xsznix/keygen
+2018-07-10 compare layout to colemak on http://bepo.fr/wiki/Corpus
+2018-07-11 Train https://www.typing.com/typingtest
