@@ -1,21 +1,9 @@
-keycodes: |-
-  include "evdev+aliases(azerty)"
-types: |-
-  include "complete"
-compat: |-
-  include "complete"
-geometry: |-
-  include "pc(pc105)"
-
-fingers_map: wide
+fingers_map: default
 
 symbols:
   before: |
-    include "pc+fr+inet(evdev)+group(shifts_toggle)+ctrl(nocaps)+level3(ralt_switch)"
-    name[Group2]= "French (wide mod, angle mod, custom modifications)";
-
-  after: |
-    key <TLDE> { [ Multi_key ], [ Multi_key ] };
+    include "latin"
+    name[Group1]= "French (custom modifications)";
 
   keys:
 # .

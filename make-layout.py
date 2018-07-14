@@ -6,16 +6,10 @@ import sys, re, json, yaml
 KEYMAP = sys.argv[1]
 
 XKB_TEMPLATE = """
-xkb_keymap {{
-    xkb_keycodes  {{ {keycodes} }};
-    xkb_types     {{ {types} }};
-    xkb_compat    {{ {compat} }};
-    xkb_symbols   {{
+default  partial alphanumeric_keys
+xkb_symbols "basic" {{
 {symbols[before]}
 {symbols[keys]}
-{symbols[after]}
-    }};
-    xkb_geometry  {{ {geometry} }};
 }};
 """
 finger_colors = {
@@ -61,10 +55,9 @@ keys_to_symbols = {
     for (k, v) in zip(layout_order, keymap["symbols"]["keys"])
 }
 
-
 with open("custom.xkb", "w") as f:
     keymap["symbols"]["keys"] = "\n".join(
-        "key %s { [], [ %s ] };" % (k, v)
+        "key %s { [ %s ] };" % (k, v)
         for (k, v) in keys_to_symbols.items()
     )
     f.write(XKB_TEMPLATE.format(**keymap))
