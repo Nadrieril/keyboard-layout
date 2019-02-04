@@ -1,0 +1,72 @@
+fingers_map: default
+
+symbols:
+  before: |
+    include "latin"
+    name[Group1]= "French";
+
+  keys:
+    - Multi_key
+    - ampersand, 1, onesuperior, exclamdown
+    - eacute, 2, asciitilde, oneeighth
+    - quotedbl, 3, numbersign, sterling
+    - apostrophe, 4, braceleft, dollar
+    - parenleft, 5, bracketleft, threeeighths
+    - minus, 6, bar, fiveeighths
+    - egrave, 7, grave, seveneighths
+    - underscore, 8, backslash, trademark
+    - ccedilla, 9, asciicircum, plusminus
+    - agrave, 0, at, degree
+    - parenright, degree, bracketright, questiondown
+    - equal, plus, braceright, dead_ogonek
+    - BackSpace
+
+    - Tab, ISO_Left_Tab
+    - a, A, ae, AE
+    - z, Z, eacute, Eacute
+    - e, E, EuroSign, cent
+    - r, R, egrave, Egrave
+    - t, T, asciitilde, asciitilde
+    - y, Y, asciitilde, asciitilde
+    - u, U, ugrave, Ugrave
+    - i, I, asciitilde, asciitilde
+    - o, O, ocircumflex, Ocircumflex
+    - p, P, asciitilde, asciitilde
+    - dead_circumflex, dead_diaeresis, dead_diaeresis, dead_abovering
+    - dollar, sterling, currency, dead_macron
+    - Return
+
+    - Control_L
+    - q, Q, asciitilde, asciitilde
+    - s, S, asciitilde, asciitilde
+    - d, D, asciitilde, asciitilde
+    - f, F, asciitilde, asciitilde
+    - g, G, dead_greek, asciitilde
+    - h, H, asciitilde, asciitilde
+    - j, J, asciitilde, asciitilde
+    - k, K, asciitilde, asciitilde
+    - l, L, asciitilde, asciitilde
+    - m, M, asciitilde, asciitilde
+    - ugrave, percent, dead_circumflex, dead_caron
+    - asterisk, mu, dead_grave, dead_breve
+
+    - Shift_L, ISO_Prev_Group, Shift_L, ISO_Prev_Group
+    - parenleft, bracketleft, braceleft, guillemotleft
+    - w, W, lstroke, Lstroke
+    - x, X, asciitilde, asciitilde
+    - c, C, ccedilla, Ccedilla
+    - v, V, asciitilde, asciitilde
+    - b, B, asciitilde, asciitilde
+    - n, N, ntilde, Ntilde
+    - comma, question, dead_acute, dead_doubleacute
+    - semicolon, period, horizconnector, multiply
+    - colon, slash, periodcentered, division
+    - exclam, section, dead_belowdot, dead_abovedot
+    - Shift_R, ISO_Next_Group, Shift_R, ISO_Next_Group
+
+    - Control_L
+    - Super_L
+    - Alt_L
+    - space, space, space, nobreakspace
+    - ISO_Level3_Shift
+    - Control_R

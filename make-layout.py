@@ -41,11 +41,16 @@ def pretty(x):
 with open("data/layout-template.json") as f:
     layout_template = f.read()
 
+with open("data/ergodox-layout-template.json") as f:
+    ergodox_layout_template = f.read()
+
 layout_order = [
     x
     for row in json.loads(layout_template) if isinstance(row, list)
-    for x in row if isinstance(x, str) and x[0] == "<"
+    for x in row if isinstance(x, str) and len(x) != 0 and x[0] == "<"
 ]
+
+layout = ergodox_layout_template
 
 with open(KEYMAP) as f:
     keymap = yaml.safe_load(f.read())
@@ -63,12 +68,12 @@ with open("custom.xkb", "w") as f:
     f.write(XKB_TEMPLATE.format(**keymap))
 
 
-fingers_map_name = keymap.get("fingers_map", "default")
-with open("data/finger-maps/{}.json".format(fingers_map_name)) as f:
-    fingers = json.loads(f.read())
-    for key, f in fingers.items():
-        layout_template = layout_template.replace("\"%s\"" % (key,),
-                "{\"c\":\"%s\"},\"%s\"" % (finger_colors[f], key))
+# fingers_map_name = keymap.get("fingers_map", "default")
+# with open("data/finger-maps/{}.json".format(fingers_map_name)) as f:
+#     fingers = json.loads(f.read())
+#     for key, f in fingers.items():
+#         layout = layout.replace("\"%s\"" % (key,),
+#                 "{\"c\":\"%s\"},\"%s\"" % (finger_colors[f], key))
 
 for (key, symbs) in keys_to_symbols.items():
     symbs = [ pretty(x.strip()) for x in symbs.split(",") ] + [""]*3
@@ -78,8 +83,8 @@ for (key, symbs) in keys_to_symbols.items():
     if symbs[0] == symbs[2]:
         symbs[2] = ""
     symb_str = "%s\\n\\n\\n%s\\n\\n\\n\\n\\n\\n%s" % (symbs[1], symbs[2], symbs[0])
-    layout_template = layout_template.replace(key, symb_str)
+    layout = layout.replace(key, symb_str)
 
 
-print(layout_template)
+print(layout)
 
