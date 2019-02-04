@@ -3,7 +3,9 @@ set -e
 tmp_file=$(mktemp)
 
 ./make-layout.py "$@" > $tmp_file
-cat $tmp_file | jq -c '.[]' | sed 's/$/,/' | xclip -in -selection clipboard
-cat $tmp_file | jq -c '.[]'
-setxkbmap fr,custom
+data="$(cat $tmp_file | jq -rf urlon.jq)"
+xdg-open "http://www.keyboard-layout-editor.com/##$data"
+
+# cat $tmp_file | jq -c '.[]'
+# setxkbmap fr,custom
 rm $tmp_file
