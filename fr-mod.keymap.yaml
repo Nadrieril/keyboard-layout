@@ -6,36 +6,61 @@ symbols:
     name[Group1]= "French (custom modifications)";
 
   keys:
-# .
-# ,
-#
-# ?
-# !
-# :
-# -
-# "
-# '
-#
-# `
-# @
-# ^
-# $
-# /
-# ;
-# <
-# >
-# #
-# _
-# |
-#
-# *
-# &
-# ~
-# =
-# +
-# %
-# £
-# °
+
+# [13668,"'"]
+# [9631,","]
+# [8177,"é"]
+# [6156,"."]
+# [6064,":"]
+# [4873,")"]
+# [4167,"\""]
+# [4068,"^"]
+# [3368,"-"]
+# [3329,"("]
+# [3042,"?"]
+# [2885,"ç"]
+# [2439,"à"]
+# [2039,"="]
+# [1759,">"]
+# [1682,"_"]
+# [1567,"!"]
+# [1437,"è"]
+# [1437,"`"]
+# [1403,"/"]
+# [1363,"<"]
+# [1261,"3"]
+# [1259,"1"]
+# [1126,"ê"]
+# [1104,"0"]
+# [912,"2"]
+# [777,"}"]
+# [775,"{"]
+# [706,"$"]
+# [704,"*"]
+# [684,";"]
+# [621,"\\"]
+# [556,"]"]
+# [530,"["]
+# [514,"4"]
+# [510,"#"]
+# [461,"|"]
+# [441,"5"]
+# [428,"+"]
+# [342,"6"]
+# [334,"8"]
+# [326,"@"]
+# [310,"9"]
+# [289,"7"]
+# [265,"ô"]
+# [259,"&"]
+# [254,"∘"]
+# [226,"ù"]
+# [170,"î"]
+# [155,"°"]
+# [136,"û"]
+# [118,"%"]
+# [60,"â"]
+# [48,"~"]
 
 
     - Multi_key
@@ -44,13 +69,13 @@ symbols:
     - 3, numbersign, asciitilde, asciitilde
     - 4, dollar, sterling, asciitilde
     - 5, percent, EuroSign, yen
-    - minus, underscore, asciitilde, asciitilde
     - 6, asciitilde, asciitilde, asciitilde
     - 7, ampersand, asciitilde, asciitilde
     - 8, asciicircum, asciitilde, asciitilde
     - 9, asciitilde, asciitilde, asciitilde
     - 0, asciitilde, asciitilde, asciitilde
     - equal, plus, degree, asciitilde
+    - minus, underscore, asciitilde, asciitilde
     - BackSpace
 
     - Tab,  ISO_Left_Tab
@@ -59,12 +84,12 @@ symbols:
     - e, E, eacute, Eacute
     - r, R, egrave, Egrave
     - t, T, asciitilde, asciitilde
-    - less, greater, asciitilde, asciitilde
     - y, Y, asciitilde, asciitilde
     - u, U, ugrave, Ugrave
     - i, I, asciitilde, asciitilde
     - o, O, ocircumflex, Ocircumflex
     - p, P, asciitilde, asciitilde
+    - less, greater, asciitilde, asciitilde
     - backslash, bar, asterisk, asciitilde
     - Return
 
@@ -73,24 +98,24 @@ symbols:
     - s, S, asciitilde, asciitilde
     - d, D, asciitilde, asciitilde
     - f, F, asciitilde, asciitilde
-    - g, G, asciitilde, asciitilde
-    - minus, underscore, asciitilde, asciitilde
+    - g, G, dead_greek, asciitilde
     - h, H, asciitilde, asciitilde
     - j, J, asciitilde, asciitilde
     - k, K, asciitilde, asciitilde
     - l, L, asciitilde, asciitilde
     - m, M, asciitilde, asciitilde
+    - minus, underscore, asciitilde, asciitilde
     - apostrophe, quotedbl, grave, asciitilde
 
     - Shift_L, ISO_Prev_Group, Shift_L, ISO_Prev_Group
+    - parenleft, bracketleft, braceleft, guillemotleft
     - w, W, asciitilde, asciitilde
     - x, X, asciitilde, asciitilde
     - c, C, ccedilla, Ccedilla
     - v, V, asciitilde, asciitilde
     - b, B, asciitilde, asciitilde
-    - parenleft, bracketleft, braceleft, guillemotleft
-    - parenright, bracketright, braceright, guillemotright
     - n, N, ntilde, Ntilde
+    - parenright, bracketright, braceright, guillemotright
     - comma, question, exclam, asciitilde
     - period, colon, asciitilde, asciitilde
     - slash, semicolon, asciitilde, asciitilde

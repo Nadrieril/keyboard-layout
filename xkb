@@ -1,0 +1,7 @@
+xkb_keymap {
+	xkb_keycodes  { include "evdev+aliases(azerty)"	};
+	xkb_types     { include "complete"	};
+	xkb_compat    { include "complete"	};
+	xkb_symbols   { include "pc+fr+custom:2+inet(evdev)+group(shifts_toggle)+ctrl(nocaps)+compose_tlde"	};
+	xkb_geometry  { include "pc(pc105)"	};
+};

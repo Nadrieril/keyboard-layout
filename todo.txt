@@ -12,4 +12,4 @@
 2018-07-11 split multi-key symbols in corpus (like "ê" into "^e")
 2018-07-10 construct keyboard layout using corpus (weechat+quassel+email) and https://github.com/xsznix/keygen
 2018-07-10 compare layout to colemak on http://bepo.fr/wiki/Corpus
-2018-07-11 Train https://www.typing.com/typingtest
+2018-07-11 Train https://www.typing.com/typingtest https://bepo.fr/wiki/Apprentissage
