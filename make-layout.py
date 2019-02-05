@@ -82,8 +82,15 @@ for (key, symbs) in keys_to_symbols.items():
         symbs[1] = ""
     if symbs[0] == symbs[2]:
         symbs[2] = ""
-    symb_str = "%s\\n\\n\\n%s\\n\\n\\n\\n\\n\\n%s" % (symbs[1], symbs[2], symbs[0])
-    layout = layout.replace(key, symb_str)
+    symb_str = f'"{symbs[1]}\\n\\n\\n{symbs[2]}\\n\\n\\n\\n\\n\\n{symbs[0]}"'
+    if re.match("^[a-zA-Z]$", symbs[0]) \
+        or re.match("^<i class.*>$", symbs[0]) \
+        or symbs[0] in "⇧⎵":
+        size_str = '{"f":6, "fa": [3,0,0,4,0,0,0,0,0,0]}'
+    else:
+        size_str = '{"f":4}'
+    symb_str = f'{size_str}, {symb_str}'
+    layout = layout.replace(f'"{key}"', symb_str)
 
 
 print(layout)
