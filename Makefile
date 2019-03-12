@@ -1,0 +1,2 @@
+ergodox:
+	./build-ergodox.sh
