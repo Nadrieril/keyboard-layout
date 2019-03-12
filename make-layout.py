@@ -85,7 +85,8 @@ for (key, symbs) in keys_to_symbols.items():
     symb_str = f'"{symbs[1]}\\n\\n\\n{symbs[2]}\\n\\n\\n\\n\\n\\n{symbs[0]}"'
     if re.match("^[a-zA-Z]$", symbs[0]) \
         or re.match("^<i class.*>$", symbs[0]) \
-        or symbs[0] in "⇧⎵":
+        or symbs[0] in "⇧⎵" \
+        or (len(symbs[0]) == 1 and symbs[1] == "" and symbs[2] == ""):
         size_str = '{"f":6, "fa": [3,0,0,4,0,0,0,0,0,0]}'
     else:
         size_str = '{"f":4}'
