@@ -82,7 +82,7 @@
       "KC_BSPC"
     ],
     [
-      "KC__VOLUP",
+      "KC_VOLU",
       "KC_F1",
       "KC_F2",
       "KC_F3",
@@ -315,5 +315,7 @@
       "KC_TRNS",
       "KC_TRNS"
     ]
-  ]
+  ],
+  "author": "",
+  "notes": ""
 }
