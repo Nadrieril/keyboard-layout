@@ -29,5 +29,10 @@ uint32_t layer_state_set_user(uint32_t state) {
     } else {
         swap_hands = false;
     }
+    if (state & (1<<4)) {
+        ergodox_right_led_1_on();
+        ergodox_right_led_2_on();
+        ergodox_right_led_3_on();
+    }
     return state;
 };
