@@ -7,6 +7,7 @@
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,
     SHIFT_LAYER,
+    RALT_LAYER,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -14,6 +15,7 @@ __KEYMAP_GOES_HERE__
 };
 
 // Layers:
+// 6: alt-gr
 // 5: shift
 // 4: error (when pressing the old shift keys)
 // 3: swap_hands
@@ -50,11 +52,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // If special shift layer is on.
     if (layer_state & (1<<5)) {
         action_t action = action_for_key(5, record->event.key);
-        // Keys defined on the special shift layer should not be processed shifted.
+        // Keys defined on the special modifier layer should not be processed modified.
         if (action.code != ACTION_TRANSPARENT) {
             unregister_code(KC_LSFT);
             process_action(record, action);
             register_code(KC_LSFT);
+            return false;
+        }
+    }
+    // If special alt-gr layer is on.
+    if (layer_state & (1<<6)) {
+        action_t action = action_for_key(6, record->event.key);
+        // Keys defined on the special modifier layer should not be processed modified.
+        if (action.code != ACTION_TRANSPARENT) {
+            unregister_code(KC_RALT);
+            process_action(record, action);
+            register_code(KC_RALT);
             return false;
         }
     }
@@ -67,6 +80,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(KC_LSFT);
                 layer_off(5);
+            }
+            return false; // Skip all further processing of this key
+        case RALT_LAYER:
+            if (record->event.pressed) {
+                register_code(KC_RALT);
+                layer_on(6);
+            } else {
+                unregister_code(KC_RALT);
+                layer_off(6);
             }
             return false; // Skip all further processing of this key
         default:
