@@ -11,3 +11,10 @@
 // #define TAPPING_TERM 50
 // #define RETRO_TAPPING
 
+// Mouse scrolling
+#define MK_3_SPEED
+#define MK_MOMENTARY_ACCEL
+#define MK_W_INTERVAL_UNMOD 80
+#define MK_W_INTERVAL_0 200
+#define MK_W_INTERVAL_1 40
+#define MK_W_INTERVAL_2 20
