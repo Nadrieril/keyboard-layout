@@ -14,7 +14,7 @@
 // Mouse scrolling
 #define MK_3_SPEED
 #define MK_MOMENTARY_ACCEL
-#define MK_W_INTERVAL_UNMOD 80
+#define MK_W_INTERVAL_UNMOD 100
 #define MK_W_INTERVAL_0 200
 #define MK_W_INTERVAL_1 40
-#define MK_W_INTERVAL_2 20
+#define MK_W_INTERVAL_2 10
