@@ -34,12 +34,14 @@ uint32_t layer_state_set_user(uint32_t state) {
     if (state & (1<<2)) {
         ergodox_right_led_2_on();
     }
+    // Swap layer
     if (state & (1<<3)) {
         ergodox_right_led_3_on();
         swap_hands = true;
     } else {
         swap_hands = false;
     }
+    // Error layer
     if (state & (1<<4)) {
         ergodox_right_led_1_on();
         ergodox_right_led_2_on();
@@ -48,7 +50,28 @@ uint32_t layer_state_set_user(uint32_t state) {
     return state;
 };
 
+// static uint16_t backspace_timer;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // // Freeze keyboard for a time after backspace has been released
+    // if (keycode == KC_BSPC && !record->event.pressed) {
+    //     if (backspace_timer == 0) {
+    //         backspace_timer = timer_read();
+    //     }
+    //     // ergodox_right_led_1_on();
+    //     // ergodox_right_led_2_on();
+    //     // ergodox_right_led_3_on();
+    //     return true;
+    // }
+    // if (backspace_timer != 0) {
+    //     if (timer_elapsed(backspace_timer) < 1000 && record->event.pressed) {
+    //         return false;
+    //     } else {
+    //         backspace_timer = 0;
+    //         // layer_state_set_user(layer_state);
+    //     }
+    // }
+
     // If special shift layer is on.
     if (layer_state & (1<<5)) {
         action_t action = action_for_key(5, record->event.key);
