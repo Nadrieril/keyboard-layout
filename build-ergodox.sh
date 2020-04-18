@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash /home/nadrieril/wip/forks/qmk_firmware/shell.nix
+#!/usr/bin/env bash
 set -e
 
 cat ergodox_layout/layers.json \

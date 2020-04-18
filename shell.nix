@@ -1,6 +1,8 @@
-with import <nixpkgs> {};
+let
+  pkgs = import <nixpkgs> {};
+  qmk-shell = import ../../forks/qmk_firmware/shell.nix {};
 
-stdenv.mkDerivation {
+in qmk-shell.overrideAttrs (oldAttrs: {
   name = "keyboard-layout";
-  buildInputs = [ python3 python3Packages.pyyaml xorg.xkbcomp jq ];
-}
+  buildInputs = oldAttrs.buildInputs ++ (with pkgs; [ python3 python3Packages.pyyaml xorg.xkbcomp jq ]);
+})
