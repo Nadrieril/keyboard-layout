@@ -17,11 +17,15 @@ __KEYMAP_GOES_HERE__
 // Layers:
 // 6: alt-gr
 // 5: shift
-// 4: error (when pressing the old shift keys)
+// 4: error (used to signal a deprecated key)
 // 3: swap_hands
 // 2: qwerty for gaming
 // 1: numpad and fn layer
 // 0: base
+#define SWAP_LAYER_ID 3
+#define ERROR_LAYER_ID 4
+#define SHIFT_LAYER_ID 5
+#define RALT_LAYER_ID 6
 
 uint32_t layer_state_set_user(uint32_t state) {
     ergodox_board_led_off();
@@ -35,14 +39,14 @@ uint32_t layer_state_set_user(uint32_t state) {
         ergodox_right_led_2_on();
     }
     // Swap layer
-    if (state & (1<<3)) {
+    if (state & (1<<SWAP_LAYER_ID)) {
         ergodox_right_led_3_on();
         swap_hands = true;
     } else {
         swap_hands = false;
     }
     // Error layer
-    if (state & (1<<4)) {
+    if (state & (1<<ERROR_LAYER_ID)) {
         ergodox_right_led_1_on();
         ergodox_right_led_2_on();
         ergodox_right_led_3_on();
@@ -50,47 +54,35 @@ uint32_t layer_state_set_user(uint32_t state) {
     return state;
 };
 
-// static uint16_t backspace_timer;
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // // Freeze keyboard for a time after backspace has been released
-    // if (keycode == KC_BSPC && !record->event.pressed) {
-    //     if (backspace_timer == 0) {
-    //         backspace_timer = timer_read();
-    //     }
-    //     // ergodox_right_led_1_on();
-    //     // ergodox_right_led_2_on();
-    //     // ergodox_right_led_3_on();
-    //     return true;
-    // }
-    // if (backspace_timer != 0) {
-    //     if (timer_elapsed(backspace_timer) < 1000 && record->event.pressed) {
-    //         return false;
-    //     } else {
-    //         backspace_timer = 0;
-    //         // layer_state_set_user(layer_state);
-    //     }
-    // }
-
     // If special shift layer is on.
-    if (layer_state & (1<<5)) {
-        action_t action = action_for_key(5, record->event.key);
+    if (layer_state & (1<<SHIFT_LAYER_ID)) {
+        action_t action = action_for_key(SHIFT_LAYER_ID, record->event.key);
         // Keys defined on the special modifier layer should not be processed modified.
         if (action.code != ACTION_TRANSPARENT) {
-            unregister_code(KC_LSFT);
+            if (record->event.pressed) {
+                unregister_code(KC_LSFT);
+            }
             process_action(record, action);
-            register_code(KC_LSFT);
+            if (!record->event.pressed) {
+                register_code(KC_LSFT);
+            }
             return false;
         }
     }
+
     // If special alt-gr layer is on.
-    if (layer_state & (1<<6)) {
-        action_t action = action_for_key(6, record->event.key);
+    if (layer_state & (1<<RALT_LAYER_ID)) {
+        action_t action = action_for_key(RALT_LAYER_ID, record->event.key);
         // Keys defined on the special modifier layer should not be processed modified.
         if (action.code != ACTION_TRANSPARENT) {
-            unregister_code(KC_RALT);
+            if (record->event.pressed) {
+                unregister_code(KC_RALT);
+            }
             process_action(record, action);
-            register_code(KC_RALT);
+            if (!record->event.pressed) {
+                register_code(KC_RALT);
+            }
             return false;
         }
     }
@@ -99,19 +91,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case SHIFT_LAYER:
             if (record->event.pressed) {
                 register_code(KC_LSFT);
-                layer_on(5);
+                layer_on(SHIFT_LAYER_ID);
             } else {
                 unregister_code(KC_LSFT);
-                layer_off(5);
+                layer_off(SHIFT_LAYER_ID);
             }
             return false; // Skip all further processing of this key
         case RALT_LAYER:
             if (record->event.pressed) {
                 register_code(KC_RALT);
-                layer_on(6);
+                layer_on(RALT_LAYER_ID);
             } else {
                 unregister_code(KC_RALT);
-                layer_off(6);
+                layer_off(RALT_LAYER_ID);
             }
             return false; // Skip all further processing of this key
         default:
