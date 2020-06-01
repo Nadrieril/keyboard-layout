@@ -1,8 +1,9 @@
 {
   "version": 1,
+  "notes": "",
   "documentation": "\"This file is a QMK Configurator export. You can import this at <https://config.qmk.fm>. It can also be used directly with QMK's source code.\n\nTo setup your QMK environment check out the tutorial: <https://docs.qmk.fm/#/newbs>\n\nYou can convert this file to a keymap.c using this command: `qmk json2c {keymap}`\n\nYou can compile this keymap using this command: `qmk compile {keymap}`\"\n",
   "keyboard": "ergodox_ez",
-  "keymap": "ergodox_ez_layout_ergodox_mine.json",
+  "keymap": "ergodox_ez_layout_ergodox_mine",
   "layout": "LAYOUT_ergodox",
   "layers": [
     [
@@ -129,7 +130,7 @@
       "KC_F11",
       "KC_F12",
       "KC_VOLU",
-      "MAGIC_TOGGLE_NKRO",
+      "NK_TOGG",
       "KC_NO",
       "KC_P7",
       "KC_P8",
@@ -552,6 +553,5 @@
       "KC_TRNS"
     ]
   ],
-  "author": "",
-  "notes": ""
+  "author": ""
 }
