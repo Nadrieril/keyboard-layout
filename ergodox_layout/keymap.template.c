@@ -8,9 +8,9 @@
 // 11: alt-gr
 // 10: shift
 // 5: numpad and fn layer
-// 1: workman layout
+// 1: alternative layout
 // 0: base
-#define WORKMAN_LAYER_ID 1
+#define ALT_LAYOUT_LAYER_ID 1
 #define FN_LAYER_ID 5
 #define SHIFT_LAYER_ID 10
 #define RALT_LAYER_ID 11
@@ -26,7 +26,7 @@ uint32_t layer_state_set_user(uint32_t state) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
 
-    if (state & (1<<WORKMAN_LAYER_ID)) {
+    if (state & (1<<ALT_LAYOUT_LAYER_ID)) {
         ergodox_right_led_2_on();
     }
     if (state & (1<<FN_LAYER_ID)) {
