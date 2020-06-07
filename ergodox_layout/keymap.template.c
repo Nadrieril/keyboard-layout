@@ -4,19 +4,17 @@
 #include "version.h"
 
 // Layers:
-// 6: alt-gr
-// 5: shift
-// 4: error (used to signal a deprecated key)
-// 3: swap_hands
-// 2: numpad and fn layer
+// 15: swap_hands
+// 11: alt-gr
+// 10: shift
+// 5: numpad and fn layer
 // 1: workman layout
 // 0: base
 #define WORKMAN_LAYER_ID 1
-#define FN_LAYER_ID 2
-#define SWAP_LAYER_ID 3
-#define ERROR_LAYER_ID 4
-#define SHIFT_LAYER_ID 5
-#define RALT_LAYER_ID 6
+#define FN_LAYER_ID 5
+#define SHIFT_LAYER_ID 10
+#define RALT_LAYER_ID 11
+#define SWAP_LAYER_ID 15
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
@@ -27,25 +25,20 @@ uint32_t layer_state_set_user(uint32_t state) {
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
-    if (state & (1<<FN_LAYER_ID)) {
-        ergodox_right_led_1_on();
-    }
+
     if (state & (1<<WORKMAN_LAYER_ID)) {
         ergodox_right_led_2_on();
     }
-    // Swap layer
+    if (state & (1<<FN_LAYER_ID)) {
+        ergodox_right_led_1_on();
+    }
     if (state & (1<<SWAP_LAYER_ID)) {
         ergodox_right_led_3_on();
         swap_hands = true;
     } else {
         swap_hands = false;
     }
-    // Error layer
-    if (state & (1<<ERROR_LAYER_ID)) {
-        ergodox_right_led_1_on();
-        ergodox_right_led_2_on();
-        ergodox_right_led_3_on();
-    }
+
     return state;
 };
 
