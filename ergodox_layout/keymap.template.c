@@ -12,7 +12,7 @@ __KEYMAP_GOES_HERE__
 // 5: shift
 // 4: error (used to signal a deprecated key)
 // 3: swap_hands
-// 2: qwerty for gaming
+// 2: unused
 // 1: numpad and fn layer
 // 0: base
 #define SWAP_LAYER_ID 3
