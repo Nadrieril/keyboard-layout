@@ -2,13 +2,6 @@
 #include "debug.h"
 #include "action_layer.h"
 #include "version.h"
-#define ANY(kc) kc
-
-enum custom_keycodes {
-    PLACEHOLDER = SAFE_RANGE,
-    SHIFT_LAYER,
-    RALT_LAYER,
-};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
@@ -88,7 +81,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
-        case SHIFT_LAYER:
+        case KC_LSFT:
             if (record->event.pressed) {
                 register_code(KC_LSFT);
                 layer_on(SHIFT_LAYER_ID);
@@ -97,7 +90,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(SHIFT_LAYER_ID);
             }
             return false; // Skip all further processing of this key
-        case RALT_LAYER:
+        case KC_RALT:
             if (record->event.pressed) {
                 register_code(KC_RALT);
                 layer_on(RALT_LAYER_ID);

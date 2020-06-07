@@ -43,7 +43,7 @@
       "RALT(KC_5)",
       "LSFT(KC_QUOT)",
       "LT(1,KC_SPC)",
-      "ANY(SHIFT_LAYER)",
+      "KC_LSFT",
       "MO(3)",
       "KC_RBRC",
       "KC_6",
@@ -72,7 +72,7 @@
       "KC_DOT",
       "KC_SLSH",
       "KC_BSPC",
-      "ANY(RALT_LAYER)",
+      "KC_RALT",
       "KC_LEFT",
       "KC_DOWN",
       "KC_UP",
@@ -81,7 +81,7 @@
       "RALT(KC_EQL)",
       "KC_DEL",
       "KC_LGUI",
-      "ANY(SHIFT_LAYER)",
+      "KC_LSFT",
       "MO(1)"
     ],
     [
