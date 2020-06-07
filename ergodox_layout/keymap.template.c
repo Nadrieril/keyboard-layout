@@ -3,10 +3,6 @@
 #include "action_layer.h"
 #include "version.h"
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-__KEYMAP_GOES_HERE__
-};
-
 // Layers:
 // 6: alt-gr
 // 5: shift
@@ -21,6 +17,10 @@ __KEYMAP_GOES_HERE__
 #define ERROR_LAYER_ID 4
 #define SHIFT_LAYER_ID 5
 #define RALT_LAYER_ID 6
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+__KEYMAP_GOES_HERE__
+};
 
 uint32_t layer_state_set_user(uint32_t state) {
     ergodox_board_led_off();

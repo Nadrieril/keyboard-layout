@@ -42,16 +42,16 @@
       "RALT(KC_4)",
       "RALT(KC_5)",
       "LSFT(KC_QUOT)",
-      "LT(1,KC_SPC)",
+      "LT(FN_LAYER_ID,KC_SPC)",
       "KC_LSFT",
-      "MO(3)",
+      "MO(SWAP_LAYER_ID)",
       "KC_RBRC",
       "KC_6",
       "KC_EQL",
       "KC_8",
       "LSFT(KC_EQL)",
       "KC_P0",
-      "TG(2)",
+      "TG(WORKMAN_LAYER_ID)",
       "KC_MINS",
       "KC_Y",
       "KC_U",
@@ -82,7 +82,7 @@
       "KC_DEL",
       "KC_LGUI",
       "KC_LSFT",
-      "MO(1)"
+      "MO(FN_LAYER_ID)"
     ],
     [
       "KC_VOLU",
@@ -198,9 +198,9 @@
       "RALT(KC_4)",
       "RALT(KC_5)",
       "LSFT(KC_QUOT)",
-      "LT(1,KC_SPC)",
+      "LT(FN_LAYER_ID,KC_SPC)",
       "KC_LSFT",
-      "MO(3)",
+      "MO(SWAP_LAYER_ID)",
       "KC_RBRC",
       "KC_6",
       "KC_EQL",
@@ -238,7 +238,7 @@
       "KC_DEL",
       "KC_LGUI",
       "KC_LSFT",
-      "MO(1)"
+      "MO(FN_LAYER_ID)"
     ],
     [
       "KC_TRNS",
