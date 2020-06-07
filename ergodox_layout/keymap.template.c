@@ -8,11 +8,11 @@
 // 5: shift
 // 4: error (used to signal a deprecated key)
 // 3: swap_hands
-// 2: workman layout
-// 1: numpad and fn layer
+// 2: numpad and fn layer
+// 1: workman layout
 // 0: base
-#define FN_LAYER_ID 1
-#define WORKMAN_LAYER_ID 2
+#define WORKMAN_LAYER_ID 1
+#define FN_LAYER_ID 2
 #define SWAP_LAYER_ID 3
 #define ERROR_LAYER_ID 4
 #define SHIFT_LAYER_ID 5
