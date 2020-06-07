@@ -12,9 +12,11 @@ __KEYMAP_GOES_HERE__
 // 5: shift
 // 4: error (used to signal a deprecated key)
 // 3: swap_hands
-// 2: unused
+// 2: workman layout
 // 1: numpad and fn layer
 // 0: base
+#define FN_LAYER_ID 1
+#define WORKMAN_LAYER_ID 2
 #define SWAP_LAYER_ID 3
 #define ERROR_LAYER_ID 4
 #define SHIFT_LAYER_ID 5
@@ -25,10 +27,10 @@ uint32_t layer_state_set_user(uint32_t state) {
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
-    if (state & (1<<1)) {
+    if (state & (1<<FN_LAYER_ID)) {
         ergodox_right_led_1_on();
     }
-    if (state & (1<<2)) {
+    if (state & (1<<WORKMAN_LAYER_ID)) {
         ergodox_right_led_2_on();
     }
     // Swap layer
