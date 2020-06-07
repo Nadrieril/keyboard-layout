@@ -3,6 +3,12 @@
 #include "action_layer.h"
 #include "version.h"
 
+#define ANY(kc) kc
+enum custom_keycodes {
+    PLACEHOLDER = SAFE_RANGE,
+    EHAT, // ê
+};
+
 // Layers:
 // 15: swap_hands
 // 11: alt-gr
@@ -43,6 +49,26 @@ uint32_t layer_state_set_user(uint32_t state) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case EHAT:
+            if (record->event.pressed) {
+                unregister_code(KC_RALT);
+                SEND_STRING(SS_TAP(X_LBRC)"e");
+                register_code(KC_RALT);
+            }
+            break;
+    }
+
+    if (keycode == KC_LSFT) {
+        if (record->event.pressed) {
+            register_code(KC_LSFT);
+            layer_on(SHIFT_LAYER_ID);
+        } else {
+            unregister_code(KC_LSFT);
+            layer_off(SHIFT_LAYER_ID);
+        }
+        return false;
+    }
     // If special shift layer is on.
     if (layer_state & (1<<SHIFT_LAYER_ID)) {
         action_t action = action_for_key(SHIFT_LAYER_ID, record->event.key);
@@ -59,6 +85,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
 
+    if (keycode == KC_RALT) {
+        if (record->event.pressed) {
+            register_code(KC_RALT);
+            layer_on(RALT_LAYER_ID);
+        } else {
+            unregister_code(KC_RALT);
+            layer_off(RALT_LAYER_ID);
+        }
+        return false;
+    }
     // If special alt-gr layer is on.
     if (layer_state & (1<<RALT_LAYER_ID)) {
         action_t action = action_for_key(RALT_LAYER_ID, record->event.key);
@@ -75,26 +111,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
 
-    switch (keycode) {
-        case KC_LSFT:
-            if (record->event.pressed) {
-                register_code(KC_LSFT);
-                layer_on(SHIFT_LAYER_ID);
-            } else {
-                unregister_code(KC_LSFT);
-                layer_off(SHIFT_LAYER_ID);
-            }
-            return false; // Skip all further processing of this key
-        case KC_RALT:
-            if (record->event.pressed) {
-                register_code(KC_RALT);
-                layer_on(RALT_LAYER_ID);
-            } else {
-                unregister_code(KC_RALT);
-                layer_off(RALT_LAYER_ID);
-            }
-            return false; // Skip all further processing of this key
-        default:
-            return true; // Process all other keycodes normally
-    }
+    return true;
 }
