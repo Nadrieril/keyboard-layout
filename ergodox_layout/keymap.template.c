@@ -85,13 +85,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // store_or_get_action mostly.
     keypos_t key = record->event.key;
     uint8_t layer;
+    // Get the layer on which the key is defined
     if (record->event.pressed) {
         layer = layer_switch_get_layer(key);
         update_source_layers_cache(key, layer);
     } else {
         layer = read_source_layers_cache(key);
     }
-    if (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID) {
+    // If the layer is a special mod layer, _and_ if it is currently active, we
+    // temporarily unregister the modifier so that the key can be processed
+    // unmodified. If the layer is inactive, the modifier has already been
+    // (un)registered so we're good.
+    if (layer_state_is(layer) && (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID)) {
         action_t action = action_for_key(layer, key);
         if (record->event.pressed) {
             if (layer == SHIFT_LAYER_ID) {
