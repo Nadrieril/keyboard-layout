@@ -56,7 +56,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_TAP(X_LBRC)"e");
                 register_code(KC_RALT);
             }
-            break;
+            return true;
     }
 
     if (keycode == KC_LSFT) {
@@ -69,22 +69,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     }
-    // If special shift layer is on.
-    if (layer_state & (1<<SHIFT_LAYER_ID)) {
-        action_t action = action_for_key(SHIFT_LAYER_ID, record->event.key);
-        // Keys defined on the special modifier layer should not be processed modified.
-        if (action.code != ACTION_TRANSPARENT) {
-            if (record->event.pressed) {
-                unregister_code(KC_LSFT);
-            }
-            process_action(record, action);
-            if (!record->event.pressed) {
-                register_code(KC_LSFT);
-            }
-            return false;
-        }
-    }
-
     if (keycode == KC_RALT) {
         if (record->event.pressed) {
             register_code(KC_RALT);
@@ -95,20 +79,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     }
-    // If special alt-gr layer is on.
-    if (layer_state & (1<<RALT_LAYER_ID)) {
-        action_t action = action_for_key(RALT_LAYER_ID, record->event.key);
-        // Keys defined on the special modifier layer should not be processed modified.
-        if (action.code != ACTION_TRANSPARENT) {
-            if (record->event.pressed) {
+
+    // Keys defined on the special modifier layer should not be processed
+    // modified. I'm replicating behavior from tmk_core here. See
+    // store_or_get_action mostly.
+    keypos_t key = record->event.key;
+    uint8_t layer;
+    if (record->event.pressed) {
+        layer = layer_switch_get_layer(key);
+        update_source_layers_cache(key, layer);
+    } else {
+        layer = read_source_layers_cache(key);
+    }
+    if (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID) {
+        action_t action = action_for_key(layer, key);
+        if (record->event.pressed) {
+            if (layer == SHIFT_LAYER_ID) {
+                unregister_code(KC_LSFT);
+            }
+            if (layer == RALT_LAYER_ID) {
                 unregister_code(KC_RALT);
             }
-            process_action(record, action);
-            if (!record->event.pressed) {
+        }
+        process_action(record, action);
+        if (!record->event.pressed) {
+            if (layer == SHIFT_LAYER_ID) {
+                register_code(KC_LSFT);
+            }
+            if (layer == RALT_LAYER_ID) {
                 register_code(KC_RALT);
             }
-            return false;
         }
+        return false;
     }
 
     return true;
