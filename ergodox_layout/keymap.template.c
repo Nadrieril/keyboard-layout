@@ -13,11 +13,13 @@ enum custom_keycodes {
 // 15: swap_hands
 // 11: alt-gr
 // 10: shift
-// 5: numpad and fn layer
+// 6: symbols layer
+// 5: numpad and arrows layer
 // 1: alternative layout
 // 0: base
 #define ALT_LAYOUT_LAYER_ID 1
 #define FN_LAYER_ID 5
+#define SYMBOLS_LAYER_ID 6
 #define SHIFT_LAYER_ID 10
 #define RALT_LAYER_ID 11
 #define SWAP_LAYER_ID 15
@@ -38,7 +40,12 @@ uint32_t layer_state_set_user(uint32_t state) {
     if (state & (1<<FN_LAYER_ID)) {
         ergodox_right_led_1_on();
     }
+    if (state & (1<<SYMBOLS_LAYER_ID)) {
+        ergodox_right_led_3_on();
+    }
     if (state & (1<<SWAP_LAYER_ID)) {
+        ergodox_right_led_1_on();
+        ergodox_right_led_2_on();
         ergodox_right_led_3_on();
         swap_hands = true;
     } else {
