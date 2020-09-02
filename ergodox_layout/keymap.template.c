@@ -173,70 +173,70 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 
 typedef struct {
-  int state;
+    int state;
 } tap;
 
 enum {
-  SINGLE_TAP = 1,
-  SINGLE_HOLD,
-  DOUBLE_TAP,
-  DOUBLE_HOLD,
-  TRIPLE_TAP,
-  TRIPLE_HOLD
+    SINGLE_TAP = 1,
+    SINGLE_HOLD,
+    DOUBLE_TAP,
+    DOUBLE_HOLD,
+    TRIPLE_TAP,
+    TRIPLE_HOLD
 };
 
 int cur_dance (qk_tap_dance_state_t *state) {
-  if (state->count == 1) {
-    if (state->pressed) return SINGLE_HOLD;
-    else return SINGLE_TAP;
-  }
-  else if (state->count == 2) {
-    if (state->pressed) return DOUBLE_HOLD;
-    else return DOUBLE_TAP;
-  }
-  else if (state->count == 3) {
-    if (state->interrupted || !state->pressed)  return TRIPLE_TAP;
-    else return TRIPLE_HOLD;
-  }
-  else return 0;
+    if (state->count == 1) {
+        if (state->pressed) return SINGLE_HOLD;
+        else return SINGLE_TAP;
+    }
+    else if (state->count == 2) {
+        if (state->pressed) return DOUBLE_HOLD;
+        else return DOUBLE_TAP;
+    }
+    else if (state->count == 3) {
+        if (state->interrupted || !state->pressed)  return TRIPLE_TAP;
+        else return TRIPLE_HOLD;
+    }
+    else return 0;
 }
 
 
 static tap alttap_state = {
-  .state = 0
+    .state = 0
 };
 
 void alt_finished (qk_tap_dance_state_t *state, void *user_data) {
-  alttap_state.state = cur_dance(state);
-  switch (alttap_state.state) {
-    case SINGLE_TAP:
-        register_code(KC_LALT);
-        unregister_code(KC_LALT);
-        break;
-    case DOUBLE_TAP:
-        set_oneshot_layer(SYMBOLS_LAYER_ID, ONESHOT_START);
-        clear_oneshot_layer_state(ONESHOT_PRESSED);
-        break;
-    case SINGLE_HOLD:
-        register_code(KC_LALT);
-        break;
-    case DOUBLE_HOLD:
-        layer_on(SYMBOLS_LAYER_ID);
-        break;
-  }
+    alttap_state.state = cur_dance(state);
+    switch (alttap_state.state) {
+        case SINGLE_TAP:
+            register_code(KC_LALT);
+            unregister_code(KC_LALT);
+            break;
+        case DOUBLE_TAP:
+            set_oneshot_layer(SYMBOLS_LAYER_ID, ONESHOT_START);
+            clear_oneshot_layer_state(ONESHOT_PRESSED);
+            break;
+        case SINGLE_HOLD:
+            register_code(KC_LALT);
+            break;
+        case DOUBLE_HOLD:
+            layer_on(SYMBOLS_LAYER_ID);
+            break;
+    }
 }
 
 void alt_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (alttap_state.state) {
-    case SINGLE_TAP:
-    case DOUBLE_TAP:
-        break;
-    case SINGLE_HOLD:
-        unregister_code(KC_LALT);
-        break;
-    case DOUBLE_HOLD:
-        layer_off(SYMBOLS_LAYER_ID);
-        break;
-  }
-  alttap_state.state = 0;
+    switch (alttap_state.state) {
+        case SINGLE_TAP:
+        case DOUBLE_TAP:
+            break;
+        case SINGLE_HOLD:
+            unregister_code(KC_LALT);
+            break;
+        case DOUBLE_HOLD:
+            layer_off(SYMBOLS_LAYER_ID);
+            break;
+    }
+    alttap_state.state = 0;
 }
