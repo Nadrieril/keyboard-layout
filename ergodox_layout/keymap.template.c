@@ -131,6 +131,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+// See https://docs.qmk.fm/#/tap_hold?id=tap-hold-configuration-options
 uint16_t get_tapping_term(uint16_t keycode) {
     switch (keycode) {
         case TD(TD_ALT_OR_SYMBOLS):
