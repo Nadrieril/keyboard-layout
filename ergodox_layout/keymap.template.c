@@ -139,6 +139,29 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM;
     }
 }
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    // warning: reversed. See https://github.com/qmk/qmk_firmware/issues/8999
+    switch (keycode) {
+        default:
+            return false;
+    }
+}
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LSFT_T(KC_SPC):
+            return true;
+        default:
+            return false;
+    }
+}
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LSFT_T(KC_SPC):
+            return true;
+        default:
+            return false;
+    }
+}
 
 /// Tap dance
 // From https://github.com/walkerstop/qmk_firmware/blob/fanoe/keyboards/wheatfield/blocked65/keymaps/walker/keymap.c
