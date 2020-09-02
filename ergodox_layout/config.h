@@ -7,8 +7,7 @@
 #define QMK_KEYS_PER_SCAN 4
 #undef IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
-// #undef TAPPING_TERM
-// #define TAPPING_TERM 50
+#define TAPPING_TERM_PER_KEY
 // #define RETRO_TAPPING
 
 // Mouse scrolling

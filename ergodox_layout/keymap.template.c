@@ -4,9 +4,16 @@
 #include "version.h"
 
 #define ANY(kc) kc
+
+// Custom keycodes
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,
     EHAT, // ê
+};
+// Tap Dance declarations
+enum {
+    // ALT when held or tapped once, SYMBOLS layer held or tapped twice
+    TD_ALT_OR_SYMBOLS,
 };
 
 // Layers:
@@ -122,4 +129,91 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     return true;
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case TD(TD_ALT_OR_SYMBOLS):
+            return 500;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+/// Tap dance
+// From https://github.com/walkerstop/qmk_firmware/blob/fanoe/keyboards/wheatfield/blocked65/keymaps/walker/keymap.c
+// See also https://beta.docs.qmk.fm/using-qmk/software-features/feature_tap_dance
+void alt_finished (qk_tap_dance_state_t *state, void *user_data);
+void alt_reset (qk_tap_dance_state_t *state, void *user_data);
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_ALT_OR_SYMBOLS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, alt_finished, alt_reset),
+};
+
+typedef struct {
+  int state;
+} tap;
+
+enum {
+  SINGLE_TAP = 1,
+  SINGLE_HOLD,
+  DOUBLE_TAP,
+  DOUBLE_HOLD,
+  TRIPLE_TAP,
+  TRIPLE_HOLD
+};
+
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    if (state->pressed) return SINGLE_HOLD;
+    else return SINGLE_TAP;
+  }
+  else if (state->count == 2) {
+    if (state->pressed) return DOUBLE_HOLD;
+    else return DOUBLE_TAP;
+  }
+  else if (state->count == 3) {
+    if (state->interrupted || !state->pressed)  return TRIPLE_TAP;
+    else return TRIPLE_HOLD;
+  }
+  else return 0;
+}
+
+
+static tap alttap_state = {
+  .state = 0
+};
+
+void alt_finished (qk_tap_dance_state_t *state, void *user_data) {
+  alttap_state.state = cur_dance(state);
+  switch (alttap_state.state) {
+    case SINGLE_TAP:
+        register_code(KC_LALT);
+        unregister_code(KC_LALT);
+        break;
+    case DOUBLE_TAP:
+        set_oneshot_layer(SYMBOLS_LAYER_ID, ONESHOT_START);
+        clear_oneshot_layer_state(ONESHOT_PRESSED);
+        break;
+    case SINGLE_HOLD:
+        register_code(KC_LALT);
+        break;
+    case DOUBLE_HOLD:
+        layer_on(SYMBOLS_LAYER_ID);
+        break;
+  }
+}
+
+void alt_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (alttap_state.state) {
+    case SINGLE_TAP:
+    case DOUBLE_TAP:
+        break;
+    case SINGLE_HOLD:
+        unregister_code(KC_LALT);
+        break;
+    case DOUBLE_HOLD:
+        layer_off(SYMBOLS_LAYER_ID);
+        break;
+  }
+  alttap_state.state = 0;
 }
