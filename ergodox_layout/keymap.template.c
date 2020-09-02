@@ -66,25 +66,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
     }
 
-    if (keycode == KC_LSFT) {
+    if (keycode == KC_LSFT || keycode == LSFT_T(keycode)) {
         if (record->event.pressed) {
-            register_code(KC_LSFT);
             layer_on(SHIFT_LAYER_ID);
         } else {
-            unregister_code(KC_LSFT);
             layer_off(SHIFT_LAYER_ID);
         }
-        return false;
+        return true;
     }
-    if (keycode == KC_RALT) {
+    if (keycode == KC_RALT || keycode == RALT_T(keycode)) {
         if (record->event.pressed) {
-            register_code(KC_RALT);
             layer_on(RALT_LAYER_ID);
         } else {
-            unregister_code(KC_RALT);
             layer_off(RALT_LAYER_ID);
         }
-        return false;
+        return true;
     }
 
     // Keys defined on the special modifier layer should not be processed
@@ -106,19 +102,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (layer_state_is(layer) && (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID)) {
         action_t action = action_for_key(layer, key);
         if (record->event.pressed) {
-            if (layer == SHIFT_LAYER_ID) {
+            if (layer == SHIFT_LAYER_ID && keycode != LSFT(keycode)) {
                 unregister_code(KC_LSFT);
             }
-            if (layer == RALT_LAYER_ID) {
+            if (layer == RALT_LAYER_ID && keycode != RALT(keycode)) {
                 unregister_code(KC_RALT);
             }
         }
         process_action(record, action);
         if (!record->event.pressed) {
-            if (layer == SHIFT_LAYER_ID) {
+            if (layer == SHIFT_LAYER_ID && keycode != LSFT(keycode)) {
                 register_code(KC_LSFT);
             }
-            if (layer == RALT_LAYER_ID) {
+            if (layer == RALT_LAYER_ID && keycode != RALT(keycode)) {
                 register_code(KC_RALT);
             }
         }
