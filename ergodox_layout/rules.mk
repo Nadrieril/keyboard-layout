@@ -2,4 +2,5 @@
 # See rules at https://docs.qmk.fm/#/config_options?id=the-rulesmk-file
 COMMAND_ENABLE = no
 RGBLIGHT_ENABLE = no
+LTO_ENABLE = yes
 TAP_DANCE_ENABLE = yes
