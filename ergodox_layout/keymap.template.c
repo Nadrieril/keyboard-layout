@@ -49,15 +49,15 @@ uint32_t layer_state_set_user(uint32_t state) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
 
-    if (is_layer_on(state, FN_LAYER_ID) || is_layer_on(state, SWAP_LAYER_ID)) {
+    if (is_layer_on(state, FN_LAYER_ID)) {
         ergodox_right_led_1_on();
         ergodox_right_led_1_set(10);
     }
-    if (is_layer_on(state, ALT_LAYOUT_LAYER_ID) || is_layer_on(state, SWAP_LAYER_ID)) {
+    if (is_layer_on(state, ALT_LAYOUT_LAYER_ID)) {
         ergodox_right_led_2_on();
         ergodox_right_led_2_set(10);
     }
-    if (is_layer_on(state, SYMBOLS_LAYER_ID) || is_layer_on(state, SWAP_LAYER_ID)) {
+    if (is_layer_on(state, SYMBOLS_LAYER_ID)) {
         ergodox_right_led_3_on();
         ergodox_right_led_3_set(10);
     }
