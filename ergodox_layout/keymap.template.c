@@ -51,12 +51,15 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     if (is_layer_on(FN_LAYER_ID) || is_layer_on(SWAP_LAYER_ID)) {
         ergodox_right_led_1_on();
+        ergodox_right_led_1_set(10);
     }
     if (is_layer_on(ALT_LAYOUT_LAYER_ID) || is_layer_on(SWAP_LAYER_ID)) {
         ergodox_right_led_2_on();
+        ergodox_right_led_2_set(10);
     }
     if (is_layer_on(SYMBOLS_LAYER_ID) || is_layer_on(SWAP_LAYER_ID)) {
         ergodox_right_led_3_on();
+        ergodox_right_led_3_set(10);
     }
     swap_hands = is_layer_on(SWAP_LAYER_ID);
 
