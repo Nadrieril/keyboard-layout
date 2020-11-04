@@ -35,29 +35,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
 };
 
+bool is_layer_on(uint32_t state, uint32_t layer) {
+    if (state & (1<<layer)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 uint32_t layer_state_set_user(uint32_t state) {
     ergodox_board_led_off();
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
 
-    if (state & (1<<ALT_LAYOUT_LAYER_ID)) {
-        ergodox_right_led_2_on();
-    }
-    if (state & (1<<FN_LAYER_ID)) {
+    if (is_layer_on(FN_LAYER_ID) || is_layer_on(SWAP_LAYER_ID)) {
         ergodox_right_led_1_on();
     }
-    if (state & (1<<SYMBOLS_LAYER_ID)) {
-        ergodox_right_led_3_on();
-    }
-    if (state & (1<<SWAP_LAYER_ID)) {
-        ergodox_right_led_1_on();
+    if (is_layer_on(ALT_LAYOUT_LAYER_ID) || is_layer_on(SWAP_LAYER_ID)) {
         ergodox_right_led_2_on();
-        ergodox_right_led_3_on();
-        swap_hands = true;
-    } else {
-        swap_hands = false;
     }
+    if (is_layer_on(SYMBOLS_LAYER_ID) || is_layer_on(SWAP_LAYER_ID)) {
+        ergodox_right_led_3_on();
+    }
+    swap_hands = is_layer_on(SWAP_LAYER_ID);
 
     return state;
 };
