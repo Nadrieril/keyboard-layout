@@ -46,11 +46,7 @@ __KEYMAP_GOES_HERE__
 };
 
 bool is_layer_on(uint32_t state, uint32_t layer) {
-    if (state & (1<<layer)) {
-        return true;
-    } else {
-        return false;
-    }
+    return state & (1<<layer);
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
