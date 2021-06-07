@@ -4,6 +4,7 @@
 #include "version.h"
 
 #define ANY(kc) kc
+#define ACTUAL(kc) kc
 
 // Custom keycodes
 enum custom_keycodes {
