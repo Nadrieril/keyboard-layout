@@ -69,17 +69,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case EHAT:
-            if (record->event.pressed) {
-                unregister_code(KC_RALT);
-                SEND_STRING(SS_TAP(X_LBRC)"e");
-                register_code(KC_RALT);
-            }
-            return true;
-    }
-
-    if (keycode == KC_LSFT || keycode == LSFT_T(keycode)) {
+    if (keycode == KC_LSFT) {
         if (record->event.pressed) {
             layer_on(SHIFT_LAYER_ID);
         } else {
@@ -87,7 +77,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return true;
     }
-    if (keycode == KC_RALT || keycode == RALT_T(keycode)) {
+    if (keycode == KC_RALT) {
         if (record->event.pressed) {
             layer_on(RALT_LAYER_ID);
         } else {
@@ -108,33 +98,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else {
         layer = read_source_layers_cache(key);
     }
+    bool special_mod_layer = layer_state_is(layer) && (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID);
+
     // If the layer is a special mod layer, _and_ if it is currently active, we
     // temporarily unregister the modifier so that the key can be processed
     // unmodified. If the layer is inactive, the modifier has already been
     // (un)registered so we're good.
-    if (layer_state_is(layer) && (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID)) {
-        action_t action = action_for_key(layer, key);
-        if (record->event.pressed) {
-            if (layer == SHIFT_LAYER_ID && keycode != LSFT(keycode)) {
-                unregister_code(KC_LSFT);
-            }
-            if (layer == RALT_LAYER_ID && keycode != RALT(keycode)) {
-                unregister_code(KC_RALT);
-            }
+    if (special_mod_layer && record->event.pressed) {
+        if (layer == SHIFT_LAYER_ID) {
+            unregister_code(KC_LSFT);
         }
-        process_action(record, action);
-        if (!record->event.pressed) {
-            if (layer == SHIFT_LAYER_ID && keycode != LSFT(keycode)) {
-                register_code(KC_LSFT);
-            }
-            if (layer == RALT_LAYER_ID && keycode != RALT(keycode)) {
-                register_code(KC_RALT);
-            }
+        if (layer == RALT_LAYER_ID) {
+            unregister_code(KC_RALT);
         }
-        return false;
     }
 
-    return true;
+    bool ret = true;
+    switch (keycode) {
+        case EHAT:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_LBRC)"e");
+            }
+            break;
+
+        default:
+            if (special_mod_layer) {
+                action_t action = action_for_key(layer, key);
+                process_action(record, action);
+                ret = false;
+            }
+    }
+
+    if (special_mod_layer && !record->event.pressed) {
+        if (layer == SHIFT_LAYER_ID) {
+            register_code(KC_LSFT);
+        }
+        if (layer == RALT_LAYER_ID) {
+            register_code(KC_RALT);
+        }
+    }
+
+    return ret;
 }
 
 // See https://docs.qmk.fm/#/tap_hold?id=tap-hold-configuration-options
