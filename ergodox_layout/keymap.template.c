@@ -8,7 +8,14 @@
 // Custom keycodes
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,
+    KC_GBP, // £
+    KC_EUR, // €
     EHAT, // ê
+    EACUTE, // é
+    EGRAV, // è
+    AGRAV, // à
+    UGRAV, // ù
+    CCED, // ç
 };
 // Tap Dance declarations
 enum {
@@ -113,20 +120,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
 
-    bool ret = true;
-    switch (keycode) {
-        case EHAT:
-            if (record->event.pressed) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case KC_GBP:
+                SEND_STRING(SS_LSFT("}"));
+                break;
+            case KC_EUR:
+                SEND_STRING(SS_RALT("e"));
+                break;
+            case EHAT:
                 SEND_STRING(SS_TAP(X_LBRC)"e");
-            }
-            break;
+                break;
+            case EACUTE:
+                SEND_STRING(SS_TAP(X_2));
+                break;
+            case EGRAV:
+                SEND_STRING(SS_TAP(X_7));
+                break;
+            case UGRAV:
+                SEND_STRING(SS_TAP(X_QUOT));
+                break;
+            case AGRAV:
+                SEND_STRING(SS_TAP(X_0));
+                break;
+            case CCED:
+                SEND_STRING(SS_TAP(X_9));
+                break;
+        }
+    }
 
-        default:
-            if (special_mod_layer) {
-                action_t action = action_for_key(layer, key);
-                process_action(record, action);
-                ret = false;
-            }
+    if (special_mod_layer) {
+        action_t action = action_for_key(layer, key);
+        process_action(record, action);
     }
 
     if (special_mod_layer && !record->event.pressed) {
@@ -138,7 +163,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
 
-    return ret;
+    return !special_mod_layer;
 }
 
 // See https://docs.qmk.fm/#/tap_hold?id=tap-hold-configuration-options
