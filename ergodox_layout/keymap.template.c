@@ -79,7 +79,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
     }
 
-    if (keycode == KC_LSFT || keycode == LSFT_T(keycode)) {
+    if (keycode == KC_LSFT || keycode == KC_RSFT || keycode == LSFT_T(keycode)) {
         if (record->event.pressed) {
             layer_on(SHIFT_LAYER_ID);
         } else {
