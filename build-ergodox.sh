@@ -2,10 +2,12 @@
 set -e
 
 cat ergodox_layout/layers.json \
-    | jq -r '
-        .layers
+    | jq -r \
+        --argjson map "$(cat ergodox_layout/azerty_map.yaml | yaml2json)" \
+        '.layers
         | to_entries[]
         | if .value | length == 0 then .value = [range(76) | "KC_NO"] else . end
+        | .value |= map(if in($map) then $map[.] else . end)
         | .value |= join(",")
         | "  [\(.key)] = LAYOUT_ergodox(\(.value)),"' \
     > ergodox_layout/.contents
