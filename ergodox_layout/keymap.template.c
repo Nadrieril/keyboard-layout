@@ -118,30 +118,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     if (record->event.pressed) {
+        bool azerty = true;
         switch (keycode) {
             case KC_GBP:
-                SEND_STRING(SS_LSFT("}"));
+                if (azerty) SEND_STRING(SS_LSFT("}"));
+                else SEND_STRING(SS_TAP(X_PAUS) "$gbp");
                 break;
             case KC_EUR:
-                SEND_STRING(SS_RALT("e"));
+                if (azerty) SEND_STRING(SS_RALT("e"));
+                else SEND_STRING(SS_TAP(X_PAUS) "$eur");
                 break;
             case EHAT:
-                SEND_STRING(SS_TAP(X_LBRC)"e");
+                if (azerty) SEND_STRING(SS_TAP(X_LBRC)"e");
+                else SEND_STRING(SS_TAP(X_PAUS) SS_LSFT("6") "e");
                 break;
             case EACUTE:
-                SEND_STRING(SS_TAP(X_2));
+                if (azerty) SEND_STRING(SS_TAP(X_2));
+                else SEND_STRING(SS_TAP(X_PAUS) SS_TAP(X_QUOT) "e");
                 break;
             case EGRAV:
-                SEND_STRING(SS_TAP(X_7));
+                if (azerty) SEND_STRING(SS_TAP(X_7));
+                else SEND_STRING(SS_TAP(X_PAUS) SS_TAP(X_GRV) "e");
                 break;
             case UGRAV:
-                SEND_STRING(SS_TAP(X_QUOT));
+                if (azerty) SEND_STRING(SS_TAP(X_QUOT));
+                else SEND_STRING(SS_TAP(X_PAUS) SS_TAP(X_GRV) "u");
                 break;
             case AGRAV:
-                SEND_STRING(SS_TAP(X_0));
+                if (azerty) SEND_STRING(SS_TAP(X_0));
+                else SEND_STRING(SS_TAP(X_PAUS) SS_TAP(X_GRV) "a");
                 break;
             case CCED:
-                SEND_STRING(SS_TAP(X_9));
+                if (azerty) SEND_STRING(SS_TAP(X_9));
+                else SEND_STRING(SS_TAP(X_PAUS) ",c");
                 break;
         }
     }
