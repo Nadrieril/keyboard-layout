@@ -118,7 +118,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     if (record->event.pressed) {
-        bool azerty = true;
+        bool azerty = false;
         switch (keycode) {
             case KC_GBP:
                 if (azerty) SEND_STRING(SS_LSFT("}"));
