@@ -81,14 +81,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return true;
     }
-    if (keycode == KC_RALT) {
-        if (record->event.pressed) {
-            layer_on(RALT_LAYER_ID);
-        } else {
-            layer_off(RALT_LAYER_ID);
-        }
-        return true;
-    }
+    // if (keycode == KC_RALT) {
+    //     if (record->event.pressed) {
+    //         layer_on(RALT_LAYER_ID);
+    //     } else {
+    //         layer_off(RALT_LAYER_ID);
+    //     }
+    //     return true;
+    // }
 
     // Keys defined on the special modifier layer should not be processed
     // modified. I'm replicating behavior from tmk_core here. See
@@ -102,7 +102,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else {
         layer = read_source_layers_cache(key);
     }
-    bool special_mod_layer = layer_state_is(layer) && (layer == SHIFT_LAYER_ID || layer == RALT_LAYER_ID);
+    bool special_mod_layer = layer_state_is(layer) && (layer == SHIFT_LAYER_ID /* || layer == RALT_LAYER_ID */);
 
     // If the layer is a special mod layer, _and_ if it is currently active, we
     // temporarily unregister the modifier so that the key can be processed
@@ -112,9 +112,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (layer == SHIFT_LAYER_ID) {
             unregister_code(KC_LSFT);
         }
-        if (layer == RALT_LAYER_ID) {
-            unregister_code(KC_RALT);
-        }
+        // if (layer == RALT_LAYER_ID) {
+        //     unregister_code(KC_RALT);
+        // }
     }
 
     if (record->event.pressed) {
@@ -164,9 +164,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (layer == SHIFT_LAYER_ID) {
             register_code(KC_LSFT);
         }
-        if (layer == RALT_LAYER_ID) {
-            register_code(KC_RALT);
-        }
+        // if (layer == RALT_LAYER_ID) {
+        //     register_code(KC_RALT);
+        // }
     }
 
     return !special_mod_layer;
