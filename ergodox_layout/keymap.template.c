@@ -26,6 +26,7 @@ enum {
 
 // Layers:
 // 15: swap_hands
+// 13: super
 // 11: alt-gr
 // 10: shift
 // 7: windows compat layer
@@ -39,6 +40,7 @@ enum {
 #define GAME_LAYER_ID 7
 #define SHIFT_LAYER_ID 10
 #define RALT_LAYER_ID 11
+#define SUPER_LAYER_ID 13
 #define SWAP_LAYER_ID 15
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -78,6 +80,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(SHIFT_LAYER_ID);
         } else {
             layer_off(SHIFT_LAYER_ID);
+        }
+        return true;
+    }
+    if (keycode == KC_LGUI) {
+        if (record->event.pressed) {
+            layer_on(SUPER_LAYER_ID);
+        } else {
+            layer_off(SUPER_LAYER_ID);
         }
         return true;
     }
