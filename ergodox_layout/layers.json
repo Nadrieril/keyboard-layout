@@ -80,7 +80,7 @@
       "KC_RBRC",
       "KC_RCBR",
       "KC_DEL",
-      "KC_NO",
+      "MO(15)",
       "MO(6)",
       "KC_LSFT"
     ],
