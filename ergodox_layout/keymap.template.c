@@ -6,6 +6,10 @@
 #define ANY(kc) kc
 #define ACTUAL(kc) kc
 
+// Until I update qmk lol
+#define QK_BOOT RESET
+#define KC_NUM KC_NLCK
+
 // Custom keycodes
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,
@@ -29,12 +33,14 @@ enum {
 // 13: super
 // 11: alt-gr
 // 10: shift
-// 7: windows compat layer
+// 7: windows compat + gaming layer
 // 6: symbols layer
 // 5: numpad and arrows layer
+// 2: sudoku
 // 1: alternative layout
 // 0: base
 #define ALT_LAYOUT_LAYER_ID 1
+#define SUDOKU_LAYER_ID 2
 #define FN_LAYER_ID 5
 #define SYMBOLS_LAYER_ID 6
 #define GAME_LAYER_ID 7
@@ -61,7 +67,7 @@ uint32_t layer_state_set_user(uint32_t state) {
         ergodox_right_led_1_on();
         ergodox_right_led_1_set(10);
     }
-    if (is_layer_on(state, ALT_LAYOUT_LAYER_ID) || is_layer_on(state, GAME_LAYER_ID)) {
+    if (is_layer_on(state, ALT_LAYOUT_LAYER_ID) || is_layer_on(state, SUDOKU_LAYER_ID) || is_layer_on(state, GAME_LAYER_ID)) {
         ergodox_right_led_2_on();
         ergodox_right_led_2_set(10);
     }
