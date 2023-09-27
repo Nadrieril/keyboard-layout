@@ -36,11 +36,13 @@ enum {
 // 7: windows compat + gaming layer
 // 6: symbols layer
 // 5: numpad and arrows layer
+// 3: sudoku with letters
 // 2: sudoku
 // 1: alternative layout
 // 0: base
 #define ALT_LAYOUT_LAYER_ID 1
 #define SUDOKU_LAYER_ID 2
+#define SUDOKU_LETTERS_LAYER_ID 3
 #define FN_LAYER_ID 5
 #define SYMBOLS_LAYER_ID 6
 #define GAME_LAYER_ID 7
@@ -63,11 +65,16 @@ uint32_t layer_state_set_user(uint32_t state) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
 
-    if (is_layer_on(state, FN_LAYER_ID)) {
+    if (is_layer_on(state, FN_LAYER_ID)
+            || is_layer_on(state, SUDOKU_LETTERS_LAYER_ID)
+            ) {
         ergodox_right_led_1_on();
         ergodox_right_led_1_set(10);
     }
-    if (is_layer_on(state, ALT_LAYOUT_LAYER_ID) || is_layer_on(state, SUDOKU_LAYER_ID) || is_layer_on(state, GAME_LAYER_ID)) {
+    if (is_layer_on(state, ALT_LAYOUT_LAYER_ID)
+            || is_layer_on(state, SUDOKU_LAYER_ID)
+            || is_layer_on(state, SUDOKU_LETTERS_LAYER_ID)
+            || is_layer_on(state, GAME_LAYER_ID)) {
         ergodox_right_led_2_on();
         ergodox_right_led_2_set(10);
     }
