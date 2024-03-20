@@ -1,7 +1,7 @@
-#include "ergodox_ez.h"
 #include "debug.h"
 #include "action_layer.h"
 #include "version.h"
+#include QMK_KEYBOARD_H
 
 #define ANY(kc) kc
 #define ACTUAL(kc) kc
