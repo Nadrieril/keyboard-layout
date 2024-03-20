@@ -17,4 +17,4 @@ cat ergodox_layout/keymap.template.c \
     > ergodox_layout/keymap.c
 rm ergodox_layout/.contents
 cd qmk_firmware
-make ergodox_ez:nadrieril:teensy
+nix-shell --run "make ergodox_ez:nadrieril:teensy"
