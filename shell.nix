@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
-  qmk-shell = import ../../forks/qmk_firmware/shell.nix {};
+  qmk-shell = import ./qmk_firmware/shell.nix {};
 
 in qmk-shell.overrideAttrs (oldAttrs: {
   name = "keyboard-layout";

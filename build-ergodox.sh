@@ -16,5 +16,5 @@ cat ergodox_layout/keymap.template.c \
           -e '/__KEYMAP_GOES_HERE__/d' \
     > ergodox_layout/keymap.c
 rm ergodox_layout/.contents
-cd $HOME/wip/forks/qmk_firmware
+cd qmk_firmware
 make ergodox_ez:nadrieril:teensy
