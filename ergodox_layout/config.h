@@ -12,6 +12,7 @@
 #define TAPPING_FORCE_HOLD_PER_KEY
 #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 #define RETRO_TAPPING
+#define SWAP_HANDS_ENABLE
 
 // Mouse scrolling
 #define MK_3_SPEED

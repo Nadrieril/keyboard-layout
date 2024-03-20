@@ -6,10 +6,6 @@
 #define ANY(kc) kc
 #define ACTUAL(kc) kc
 
-// Until I update qmk lol
-#define QK_BOOT RESET
-#define KC_NUM KC_NLCK
-
 // Custom keycodes
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,
@@ -55,11 +51,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
 };
 
-bool is_layer_on(uint32_t state, uint32_t layer) {
-    return state & (1<<layer);
+bool is_layer_on(layer_state_t state, uint8_t layer) {
+    return layer_state_cmp(state, layer);
 }
 
-uint32_t layer_state_set_user(uint32_t state) {
+layer_state_t layer_state_set_user(layer_state_t state) {
     ergodox_board_led_off();
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
