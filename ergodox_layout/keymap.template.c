@@ -26,7 +26,7 @@ enum custom_keycodes {
 // 10: shift
 // 7: windows compat + gaming layer
 // 6: symbols layer
-// 5: numpad and arrows layer
+// 5: numpad layer
 // 3: sudoku with letters
 // 2: sudoku
 // 1: alternative layout
