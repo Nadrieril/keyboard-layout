@@ -1,9 +1,11 @@
 .PHONY: ergodox
 ergodox:
-	./build-ergodox.sh
+	./layers_to_c.sh ergodox
+	cd qmk_firmware && make ergodox_ez:nadrieril:teensy
 
 .PHONY: voyager
 voyager:
+	./layers_to_c.sh voyager
 	cd qmk_firmware && make zsa/voyager:nadrieril:flash
 
 json_from_configurator:
