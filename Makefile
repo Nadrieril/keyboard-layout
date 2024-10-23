@@ -1,3 +1,4 @@
+.PHONY: ergodox
 ergodox:
 	./build-ergodox.sh
 
