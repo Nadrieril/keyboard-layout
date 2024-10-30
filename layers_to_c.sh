@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-DIR="$1"
-cat $DIR/layers.json \
+DIR="layout"
+KEYBOARD="$1"
+cat $DIR/${KEYBOARD}_keymap.json \
     | jq -r \
         '.layout as $layout
         | .layers
@@ -11,8 +12,8 @@ cat $DIR/layers.json \
         | .value |= join(",")
         | "  [\(.key)] = \($layout)(\(.value)),"' \
     > $DIR/.contents
-cat $DIR/keymap.template.c \
+cat $DIR/${KEYBOARD}_keymap.template.c \
     | sed -e "/__KEYMAP_GOES_HERE__/r $DIR/.contents" \
           -e '/__KEYMAP_GOES_HERE__/d' \
-    > $DIR/keymap.c
+    > $DIR/${KEYBOARD}_keymap.c
 rm $DIR/.contents

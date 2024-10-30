@@ -1,4 +1,4 @@
 custom.xkb
 corpus
-ergodox/keymap.c
-voyager/keymap.c
+layout/ergodox_keymap.c
+layout/voyager_keymap.c
