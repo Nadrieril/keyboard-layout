@@ -8,5 +8,8 @@ voyager:
 	./layers_to_c.sh voyager
 	cd qmk_firmware && make zsa/voyager:nadrieril:flash
 
-json_from_configurator:
-	F=~/Downloads/*ergodox_ez_layout_ergodox_mine.json; cat $$F | jq . > ergodox_layout/layers.json && rm $$F
+ergodox_from_configurator:
+	F=~/Downloads/*ergodox_ez_layout_ergodox_mine.json; cat $$F | jq . > ergodox/layers.json && rm $$F
+
+voyager_from_configurator:
+	F=~/Downloads/zsa_voyager_*.json; cat $$F | jq '.keymap = "voyager:default"' > voyager/layers.json && rm $$F
