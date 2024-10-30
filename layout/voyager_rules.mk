@@ -1,7 +1,12 @@
 # Set any rules.mk overrides for your specific keymap here.
 # See rules at https://docs.qmk.fm/#/config_options?id=the-rulesmk-file
-CONSOLE_ENABLE = no
+LTO_ENABLE = yes
+
+AUDIO_ENABLE = no
 COMMAND_ENABLE = no
+CONSOLE_ENABLE = no
+GRAVE_ESC_ENABLE = no
+MAGIC_ENABLE = no
 MOUSEKEY_ENABLE = no
-# RGB_MATRIX_CUSTOM_KB = yes
 SPACE_CADET_ENABLE = no
+UNICODE_ENABLE = no
