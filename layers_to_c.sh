@@ -3,12 +3,20 @@ set -e
 
 DIR="layout"
 KEYBOARD="$1"
+
+LAYOUT_SIZE=76
+case $KEYBOARD in
+    voyager)
+        LAYOUT_SIZE=52
+        ;;
+esac
+
 cat $DIR/${KEYBOARD}_keymap.json \
     | jq -r \
         '.layout as $layout
         | .layers
         | to_entries[]
-        | if .value | length == 0 then .value = [range(76) | "KC_NO"] else . end
+        | if .value | length == 0 then .value = [range('"$LAYOUT_SIZE"') | "KC_NO"] else . end
         | .value |= join(",")
         | "  [\(.key)] = \($layout)(\(.value)),"' \
     > $DIR/.contents

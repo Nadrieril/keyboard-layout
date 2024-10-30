@@ -19,7 +19,9 @@ qmk_symlinks:
 	ln -sf $$PWD/layout/ergodox_config.h qmk_firmware/keyboards/ergodox_ez/keymaps/nadrieril/config.h
 	ln -sf $$PWD/layout/ergodox_keymap.c qmk_firmware/keyboards/ergodox_ez/keymaps/nadrieril/keymap.c
 	ln -sf $$PWD/layout/ergodox_rules.mk qmk_firmware/keyboards/ergodox_ez/keymaps/nadrieril/rules.mk
+	ln -sf $$PWD/layout/common.h qmk_firmware/keyboards/ergodox_ez/keymaps/nadrieril/common.h
 	mkdir -p qmk_firmware/keyboards/zsa/voyager/keymaps/nadrieril
 	ln -sf $$PWD/layout/voyager_config.h qmk_firmware/keyboards/zsa/voyager/keymaps/nadrieril/config.h
 	ln -sf $$PWD/layout/voyager_keymap.c qmk_firmware/keyboards/zsa/voyager/keymaps/nadrieril/keymap.c
 	ln -sf $$PWD/layout/voyager_rules.mk qmk_firmware/keyboards/zsa/voyager/keymaps/nadrieril/rules.mk
+	ln -sf $$PWD/layout/common.h qmk_firmware/keyboards/zsa/voyager/keymaps/nadrieril/common.h

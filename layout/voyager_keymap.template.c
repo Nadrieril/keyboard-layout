@@ -1,17 +1,14 @@
-#include QMK_KEYBOARD_H
-#include "version.h"
-#define MOON_LED_LEVEL LED_LEVEL
-#define ML_SAFE_RANGE SAFE_RANGE
+// Layers:
+// 13: super
+// 11: alt-gr
+// 10: shift
+// 1: symbols and numpad
+// 0: base
+#define SHIFT_LAYER_ID 5
+#define RALT_LAYER_ID 6
+#define SUPER_LAYER_ID 7
 
-#define ANY(kc) kc
-#define ACTUAL(kc) kc
-
-enum custom_keycodes {
-  RGB_SLD = ML_SAFE_RANGE,
-  HSV_0_255_255,
-  HSV_74_255_255,
-  HSV_169_255_255,
-};
+#include "common.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
@@ -65,34 +62,5 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-
-    case RGB_SLD:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-      }
-      return false;
-    case HSV_0_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(0,255,255);
-      }
-      return false;
-    case HSV_74_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(74,255,255);
-      }
-      return false;
-    case HSV_169_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(169,255,255);
-      }
-      return false;
-  }
-  return true;
+    return process_mod_layers(keycode, record);
 }
-
-
-
