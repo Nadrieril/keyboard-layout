@@ -1,18 +1,34 @@
 // Layers:
-// 13: super
-// 11: alt-gr
-// 10: shift
+// 7: super
+// 6: alt-gr
+// 5: shift
+// 2: ???
 // 1: symbols and numpad
 // 0: base
 #define SHIFT_LAYER_ID 5
 #define RALT_LAYER_ID 6
 #define SUPER_LAYER_ID 7
+#define LAYER2 2
+#define LAYER1 1
 
 #include "common.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
 };
+
+/// Chords
+
+enum combos {
+  LAYER2_CHORD,
+};
+
+const uint16_t PROGMEM layer2_chord[] = {KC_SPC, MO(LAYER1), COMBO_END};
+combo_t key_combos[] = {
+    [LAYER2_CHORD] = COMBO(layer2_chord, MO(LAYER2)),
+};
+
+/// RGB
 
 extern rgb_config_t rgb_matrix_config;
 
@@ -47,10 +63,10 @@ void set_layer_color(int layer) {
 bool rgb_matrix_indicators_user(void) {
   if (keyboard_config.disable_layer_led) { return false; }
   switch (biton32(layer_state)) {
-    case 1:
+    case LAYER1:
       set_layer_color(1);
       break;
-    case 2:
+    case LAYER2:
       set_layer_color(2);
       break;
    default:
