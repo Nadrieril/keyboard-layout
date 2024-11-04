@@ -17,6 +17,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 __KEYMAP_GOES_HERE__
 };
 
+layer_state_t layer_state_set_user(layer_state_t state) {
+  switch(biton32(state)) {
+    case LAYER1:
+      // Turn on numlock if it isn't already on.
+      if (!host_keyboard_led_state().num_lock) {
+        tap_code(KC_NUM_LOCK);
+      }
+      break;
+  }
+  return state;
+}
+
 /// Chords
 
 enum combos {
