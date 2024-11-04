@@ -21,11 +21,14 @@ __KEYMAP_GOES_HERE__
 
 enum combos {
   LAYER2_CHORD,
+  LAYER2_CHORD2,
 };
 
 const uint16_t PROGMEM layer2_chord[] = {KC_SPC, MO(LAYER1), COMBO_END};
+const uint16_t PROGMEM layer2_chord2[] = {KC_LSFT, MO(LAYER1), COMBO_END};
 combo_t key_combos[] = {
     [LAYER2_CHORD] = COMBO(layer2_chord, MO(LAYER2)),
+    [LAYER2_CHORD2] = COMBO(layer2_chord2, MO(LAYER2)),
 };
 
 /// RGB
@@ -33,8 +36,8 @@ combo_t key_combos[] = {
 extern rgb_config_t rgb_matrix_config;
 
 const uint8_t PROGMEM ledmap[][3] = {
-    [LAYER1] = {74,255,255},
-    [LAYER2] = {41,255,255},
+    [LAYER1] = {74,255,127},
+    [LAYER2] = {41,255,127},
 };
 
 void set_layer_color(int layer) {
