@@ -9,7 +9,7 @@ voyager:
 	cd qmk_firmware && make zsa/voyager:nadrieril:flash
 
 ergodox_from_configurator:
-	F=~/Downloads/*ergodox_ez_layout_ergodox_mine.json; cat $$F | jq '.keymap = "ergodox:default"' > layout/ergodox_keymap.json && rm $$F
+	F=~/Downloads/ergodoxdefault.json; cat $$F | jq '.keymap = "ergodox:default"' > layout/ergodox_keymap.json && rm $$F
 
 voyager_from_configurator:
 	F=~/Downloads/zsa_voyager_*.json; cat $$F | jq '.keymap = "voyager:default"' > layout/voyager_keymap.json && rm $$F

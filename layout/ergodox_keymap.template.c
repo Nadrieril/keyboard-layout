@@ -6,6 +6,7 @@
 // 13: super
 // 11: alt-gr
 // 10: shift
+// 8: MIDI (see tutorial: https://sndrtj.eu/2019/10/19/Using-a-USB-midi-keyboard-on-Ubuntu/, also http://tedfelix.com/linux/linux-midi.html)
 // 7: windows compat + gaming layer
 // 6: symbols layer
 // 5: numpad layer
@@ -19,6 +20,7 @@
 #define FN_LAYER_ID 5
 #define SYMBOLS_LAYER_ID 6
 #define GAME_LAYER_ID 7
+#define MIDI_LAYER_ID 8
 #define SHIFT_LAYER_ID 10
 #define RALT_LAYER_ID 11
 #define SUPER_LAYER_ID 13
@@ -49,7 +51,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         ergodox_right_led_2_on();
         ergodox_right_led_2_set(10);
     }
-    if (is_layer_on(state, SYMBOLS_LAYER_ID)) {
+    if (is_layer_on(state, SYMBOLS_LAYER_ID)
+            || is_layer_on(state, MIDI_LAYER_ID)) {
         ergodox_right_led_3_on();
         ergodox_right_led_3_set(10);
     }

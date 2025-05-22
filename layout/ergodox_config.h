@@ -8,6 +8,7 @@
 
 #define RETRO_TAPPING
 #define SWAP_HANDS_ENABLE
+#define MIDI_ADVANCED
 
 // Mouse scrolling
 #define MK_3_SPEED
