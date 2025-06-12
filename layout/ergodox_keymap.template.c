@@ -26,6 +26,12 @@
 #define SUPER_LAYER_ID 13
 #define SWAP_LAYER_ID 15
 
+// The top-right key cycles between
+// - base layer
+// - qwerty (blue led)
+// - game (blue+green leds)
+// - sudoku (green leds)
+
 #include "common.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -46,12 +52,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
     if (is_layer_on(state, ALT_LAYOUT_LAYER_ID)
             || is_layer_on(state, QWERTY_LAYER_ID)
-            || is_layer_on(state, GAME_LAYER_ID)) {
+            || is_layer_on(state, GAME_LAYER_ID)
+        ) {
         ergodox_right_led_2_on();
         ergodox_right_led_2_set(10);
     }
     if (is_layer_on(state, SYMBOLS_LAYER_ID)
-            || is_layer_on(state, QWERTY_LAYER_ID)
+            || is_layer_on(state, GAME_LAYER_ID)
             || is_layer_on(state, SUDOKU_LAYER_ID)
             || is_layer_on(state, SUDOKU_LETTERS_LAYER_ID)) {
         ergodox_right_led_3_on();
