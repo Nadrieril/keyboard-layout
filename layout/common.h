@@ -15,6 +15,7 @@ enum custom_keycodes {
     AGRAV, // à
     UGRAV, // ù
     CCED, // ç
+    TOG_R, // toggle holding R down; for gaming
 };
 
 void process_common_custom_keycodes(uint16_t keycode, keyrecord_t *record) {
@@ -57,6 +58,8 @@ void process_common_custom_keycodes(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+bool holding_down_r = false;
+
 // Modifier layers: Shift and super happen automatically when pressing the
 // corresponding modifier. altgr is a normal layer.
 // The layer constants must be set.
@@ -85,6 +88,18 @@ bool process_mod_layers(uint16_t keycode, keyrecord_t *record) {
     //     }
     //     return true;
     // }
+
+    if (keycode == TOG_R) {
+        if (!record->event.pressed) {
+            if (holding_down_r) {
+                unregister_code(KC_R);
+            } else {
+                register_code(KC_R);
+            }
+            holding_down_r = !holding_down_r;
+        }
+        return true;
+    }
 
     // Keys defined on the special modifier layer should not be processed
     // modified. I'm replicating behavior from tmk_core here. See
